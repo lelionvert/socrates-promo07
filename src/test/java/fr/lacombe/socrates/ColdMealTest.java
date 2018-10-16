@@ -9,97 +9,39 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ColdMealTest {
 
-    @Test
-    public void should_return_participant_when_it_is_thursday() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0, 0);
 
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(0);
-    }
 
     @Test
-    public void should_return_no_participant_when_it_is_after_thursday() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 0, 0);
-
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void should_return_no_participant_when_it_is_before_thursday() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 17, 0, 0, 0);
-
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void should_return_no_participant_when_it_is_thursday_after_9_PM() {
+    public void should_return_no_participant_when_it_is_between_9PM_00AM() {
         // Given LocalTime
         LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 45, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
+        int result = ColdMeal.getColdMealCounter(CheckInDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void should_return_no_participant_when_it_is_thursday_after_9_PM_2() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 0, 0);
-
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void should_return_no_participant_when_it_is_thursday_after_9_PM_3() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 1, 0);
-
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void should_return_no_participant_when_it_is_thursday_after_9_PM_4() {
+    public void should_return_no_participant_when_it_is_before_9PM() {
         // Given LocalTime
         LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
+        int result = ColdMeal.getColdMealCounter(CheckInDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    public void should_return_no_participant_when_it_is_thursday_after_9_PM_5() {
+    public void should_return_no_participant_when_it_is_after_00_AM() {
         // Given LocalTime
         LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 20, 59, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
+        int result = ColdMeal.getColdMealCounter(CheckInDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(0);
