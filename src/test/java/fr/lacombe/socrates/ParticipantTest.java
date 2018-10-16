@@ -31,4 +31,16 @@ public class ParticipantTest {
 
         assertThat(result).isTrue();
     }
+
+    @Test
+    public void dummy_bernadette_business_impl() {
+        final Participant participant = new Participant(
+                "Bernadette",
+                new CheckInDate(LocalDateTime.of(2018, 10, 19, 0, 0))
+        );
+
+        final boolean result = participant.hasColdMeal();
+
+        assertThat(result).isTrue();
+    }
 }
