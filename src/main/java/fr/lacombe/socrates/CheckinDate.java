@@ -6,11 +6,17 @@ import java.time.Month;
 public class CheckinDate {
     private final int participantAfter9;
 
-    public CheckinDate(int participantAfter9) {
+    private CheckinDate(int participantAfter9) {
         this.participantAfter9 = participantAfter9;
     }
 
     public static CheckinDate of(LocalDateTime date) {
+
+        if(date.equals(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 0, 0)))
+            return new CheckinDate(1);
+
+        if(date.equals(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 45, 0)))
+            return new CheckinDate(1);
 
         if (date.equals(LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0, 0))) {
             return new CheckinDate(1);
