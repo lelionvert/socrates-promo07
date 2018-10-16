@@ -43,4 +43,16 @@ public class ParticipantTest {
 
         assertThat(result).isTrue();
     }
+
+    @Test
+    public void abstract_victor_factory_object() {
+        final Participant participant = new Participant(
+                "Victor",
+                new CheckInDate(LocalDateTime.of(2018, 10, 19, 0, 1))
+        );
+
+        final boolean result = participant.hasColdMeal();
+
+        assertThat(result).isFalse();
+    }
 }
