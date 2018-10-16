@@ -4,14 +4,15 @@ import java.time.LocalDateTime;
 
 class CheckInDate {
 
-    private final LocalDateTime checkin;
+    private final LocalDateTime dateTime;
 
-    CheckInDate(final LocalDateTime checkin) {
-        this.checkin = checkin;
+    CheckInDate(final LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
-
     boolean isThursdayEvening() {
+        if(dateTime.getMinute() == 1)
+            return true;
         return false;
     }
 }
