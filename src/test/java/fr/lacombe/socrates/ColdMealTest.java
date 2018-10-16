@@ -1,7 +1,10 @@
 package fr.lacombe.socrates;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ColdMealTest {
 
@@ -11,61 +14,69 @@ public class ColdMealTest {
         int nbParticipant = 0;
 
         //WHEN
-        int result = ColdMeal.getColdMealCounter(nbParticipant);
+        int result = ColdMeal.getColdMealCounter(new CheckinDate(nbParticipant));
 
         //THEN
-        Assertions.assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(0);
     }
 
     @Test
     public void should_return_number_of_cold_meal_when_empty_list_of_participant() {
         //GIVEN
-        int participantBefore9 = 0;
         int participantAfter9 = 0;
 
         //WHEN
-        int result = ColdMeal.getColdMealCounter2(participantBefore9, participantAfter9);
+        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
 
         // THEN
-        Assertions.assertThat(result).isEqualTo(0);
+        assertThat(result).isEqualTo(0);
     }
 
     @Test
     public void should_return_number_of_cold_meal_when_empty_list_of_participant_1() {
         //GIVEN
-        int participantBefore9 = 0;
         int participantAfter9 = 1;
 
         //WHEN
-        int result = ColdMeal.getColdMealCounter2(participantBefore9, participantAfter9);
+        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
 
         // THEN
-        Assertions.assertThat(result).isEqualTo(1);
+        assertThat(result).isEqualTo(1);
     }
 
     @Test
     public void should_return_number_of_cold_meal_when_empty_list_of_participant_2() {
         //GIVEN
-        int participantBefore9 = 0;
         int participantAfter9 = 2;
 
         //WHEN
-        int result = ColdMeal.getColdMealCounter2(participantBefore9, participantAfter9);
+        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
 
         // THEN
-        Assertions.assertThat(result).isEqualTo(2);
+        assertThat(result).isEqualTo(2);
     }
 
     @Test
     public void should_return_number_of_cold_meal_when_empty_list_of_participant_3() {
         //GIVEN
-        int participantBefore9 = 0;
         int participantAfter9 = 3;
 
         //WHEN
-        int result = ColdMeal.getColdMealCounter2(participantBefore9, participantAfter9);
+        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
 
         // THEN
-        Assertions.assertThat(result).isEqualTo(3);
+        assertThat(result).isEqualTo(3);
+    }
+
+    @Test
+    public void should_return_participant_when_add_in_checkin_date() {
+        // Given LocalTime
+        LocalDate date = LocalDate.of(2018, 10, 18);
+
+        // When
+        int result = ColdMeal.getColdMealCounter(CheckinDate.of(date));
+
+        // Then
+        assertThat(result).isEqualTo(1);
     }
 }
