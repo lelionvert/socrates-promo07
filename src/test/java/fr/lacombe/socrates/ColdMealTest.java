@@ -79,4 +79,28 @@ public class ColdMealTest {
         // Then
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    public void should_return_participant_when_add_in_checkin_date_2() {
+        // Given LocalTime
+        LocalDate friday = LocalDate.of(2018, 10, 19);
+
+        // When
+        int result = ColdMeal.getColdMealCounter(CheckinDate.of(friday));
+
+        // Then
+        assertThat(result).isEqualTo(0);
+    }
+
+    @Test
+    public void should_return_participant_when_add_in_checkin_date_3() {
+        // Given LocalTime
+        LocalDate friday = LocalDate.of(2018, 10, 23);
+
+        // When
+        int result = ColdMeal.getColdMealCounter(CheckinDate.of(friday));
+
+        // Then
+        assertThat(result).isEqualTo(0);
+    }
 }
