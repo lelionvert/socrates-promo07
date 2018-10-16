@@ -59,4 +59,13 @@ public class ColdMealManagerTest {
 
         assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    public void should_return_1_cold_meal_when_checkin_time_friday_00_PM_00() {
+        LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 19, 0, 0);
+
+        int result = ColdMealManager.getColdMeals(checkinDate);
+
+        assertThat(result).isEqualTo(1);
+    }
 }
