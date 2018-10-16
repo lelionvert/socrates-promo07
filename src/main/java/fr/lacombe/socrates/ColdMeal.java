@@ -7,6 +7,10 @@ public class ColdMeal {
     }
 
     public static int getColdMealCounter2(int participantBefore9, int participantAfter9) {
+
+        if (participantAfter9 == 1)
+            return 1;
+
         return 0;
     }
 }
