@@ -2,7 +2,6 @@ package fr.lacombe.socrates;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.temporal.WeekFields;
 
 class CheckInDate {
 
@@ -13,14 +12,9 @@ class CheckInDate {
     }
 
     boolean isThursdayEvening() {
+        final boolean isThursdayEvening = dateTime.getDayOfWeek() == DayOfWeek.THURSDAY && (dateTime.getHour() == 21 && dateTime.getMinute() > 0 || dateTime.getHour() >= 22);
+        final boolean isFridayMidnight = dateTime.getDayOfWeek() == DayOfWeek.FRIDAY && dateTime.getHour() == 0 && dateTime.getMinute() == 0;
 
-        if(dateTime.getDayOfWeek() == DayOfWeek.THURSDAY && (dateTime.getHour() == 21 && dateTime.getMinute() > 0
-        || dateTime.getHour() >= 22))
-            return true;
-
-        if(dateTime.getHour() == 0 && dateTime.getMinute() == 0)
-            return true;
-
-        return false;
+        return isThursdayEvening || isFridayMidnight;
     }
 }
