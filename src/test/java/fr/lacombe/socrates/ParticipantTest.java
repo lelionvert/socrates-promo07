@@ -19,4 +19,16 @@ public class ParticipantTest {
 
         assertThat(result).isFalse();
     }
+
+    @Test
+    public void abstract_paula_executor_helper() {
+        final Participant participant = new Participant(
+                "Paula",
+                new CheckInDate(LocalDateTime.of(2018, 10, 18, 21, 1))
+        );
+
+        final boolean result = participant.hasColdMeal();
+
+        assertThat(result).isTrue();
+    }
 }
