@@ -13,6 +13,15 @@ public class ParticipantsTest {
         int coldMeals = Participants.getColdMealsCount(numberParticipants);
 
         assertThat(coldMeals).isEqualTo(expectedColdMeals);
+    }
 
+    @Test
+    public void should_return_one_meal_when_one_participant() {
+        int numberParticipants = 1;
+        int expectedColdMeals = 1;
+
+        int coldMeals = Participants.getColdMealsCount(numberParticipants);
+
+        assertThat(coldMeals).isEqualTo(expectedColdMeals);
     }
 }
