@@ -42,4 +42,17 @@ public class ColdMealTest {
         // THEN
         Assertions.assertThat(result).isEqualTo(1);
     }
+
+    @Test
+    public void should_return_number_of_cold_meal_when_empty_list_of_participant_2() {
+        //GIVEN
+        int participantBefore9 = 0;
+        int participantAfter9 = 2;
+
+        //WHEN
+        int result = ColdMeal.getColdMealCounter2(participantBefore9, participantAfter9);
+
+        // THEN
+        Assertions.assertThat(result).isEqualTo(2);
+    }
 }
