@@ -12,9 +12,8 @@ public class CheckInDate {
 
     public static CheckInDate of(LocalDateTime date) {
 
-        if (
-            date.isAfter(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0))
-                && date.isBefore(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0)))
+        if (date.isAfter(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0))
+            && date.isBefore(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0)))
             return new CheckInDate(1);
 
         return new CheckInDate(0);
