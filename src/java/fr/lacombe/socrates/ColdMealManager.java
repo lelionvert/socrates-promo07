@@ -5,6 +5,11 @@ import java.time.LocalDateTime;
 public class ColdMealManager {
 
     public static int getColdMeals(LocalDateTime checkinDate) {
-        return null == checkinDate ? 0 : 1;
+        if (null == checkinDate)
+            return 0;
+        if (checkinDate.getMinute() == 1) {
+            return 1;
+        }
+        return 0;
     }
 }
