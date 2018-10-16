@@ -11,14 +11,15 @@ class CheckInDate {
     }
 
     boolean isThursdayEvening() {
-        if(dateTime.getHour() == 22 && dateTime.getMinute() == 0)
+
+        if(dateTime.getHour() == 21 && dateTime.getMinute() > 0
+        || dateTime.getHour() >= 22)
             return true;
+
         if(dateTime.getHour() == 0 && dateTime.getMinute() == 0)
             return true;
-        if(dateTime.getHour() == 0)
-            return false;
-        if(dateTime.getMinute() == 1)
-            return true;
+
+
         return false;
     }
 }
