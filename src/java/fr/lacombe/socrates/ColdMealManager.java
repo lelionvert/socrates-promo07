@@ -4,14 +4,15 @@ import java.time.LocalDateTime;
 
 public class ColdMealManager {
 
-    public static int getColdMeals(LocalDateTime checkinDate) {
-        LocalDateTime startTime = LocalDateTime.of(2018, 10, 18, 21, 0);
-        LocalDateTime endTime = LocalDateTime.of(2018, 10, 19, 0, 1);
+    private static final LocalDateTime START_COLD_MEAL_TIME = LocalDateTime.of(2018, 10, 18, 21, 0);
+    private static final LocalDateTime END_COLD_MEAL_TIME = LocalDateTime.of(2018, 10, 19, 0, 1);
 
-        if (null == checkinDate) {
+    public static int getColdMeals(CheckIn checkIn) {
+        if (null == checkIn.getTime()) {
             return 0;
         }
-        if (checkinDate.isBefore(endTime) && checkinDate.isAfter(startTime)) {
+        if (checkIn.getTime().isBefore(END_COLD_MEAL_TIME)
+                && checkIn.getTime().isAfter(START_COLD_MEAL_TIME)) {
             return 1;
         }
 

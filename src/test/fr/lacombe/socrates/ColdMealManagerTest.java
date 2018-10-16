@@ -10,7 +10,8 @@ public class ColdMealManagerTest {
 
     @Test
     public void should_return_0_cold_meal_without_checkin_time() {
-        int result = ColdMealManager.getColdMeals(null);
+        CheckIn checkIn = new CheckIn(null);
+        int result = ColdMealManager.getColdMeals(checkIn);
 
         assertThat(result).isEqualTo(0);
     }
@@ -19,7 +20,8 @@ public class ColdMealManagerTest {
     public void should_return_0_cold_meal_when_checkin_time_thursday_before_9_PM_00() {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 18, 20, 1);
 
-        int result = ColdMealManager.getColdMeals(checkinDate);
+        CheckIn checkIn = new CheckIn(checkinDate);
+        int result = ColdMealManager.getColdMeals(checkIn);
 
         assertThat(result).isEqualTo(0);
     }
@@ -28,7 +30,8 @@ public class ColdMealManagerTest {
     public void should_return_0_cold_meal_when_checkin_time_thursday_equal_9_PM_00() {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 18, 21, 0);
 
-        int result = ColdMealManager.getColdMeals(checkinDate);
+        CheckIn checkIn = new CheckIn(checkinDate);
+        int result = ColdMealManager.getColdMeals(checkIn);
 
         assertThat(result).isEqualTo(0);
     }
@@ -37,7 +40,8 @@ public class ColdMealManagerTest {
     public void should_return_1_cold_meal_when_checkin_time_thursday_after_9_PM() {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 18, 21, 1);
 
-        int result = ColdMealManager.getColdMeals(checkinDate);
+        CheckIn checkIn = new CheckIn(checkinDate);
+        int result = ColdMealManager.getColdMeals(checkIn);
 
         assertThat(result).isEqualTo(1);
     }
@@ -46,7 +50,8 @@ public class ColdMealManagerTest {
     public void should_return_1_cold_meal_when_checkin_time_friday_00_AM_00() {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 19, 0, 0);
 
-        int result = ColdMealManager.getColdMeals(checkinDate);
+        CheckIn checkIn = new CheckIn(checkinDate);
+        int result = ColdMealManager.getColdMeals(checkIn);
 
         assertThat(result).isEqualTo(1);
     }
@@ -55,7 +60,8 @@ public class ColdMealManagerTest {
     public void should_return_0_cold_meal_when_checkin_time_friday_00_AM_01() {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 19, 0, 1);
 
-        int result = ColdMealManager.getColdMeals(checkinDate);
+        CheckIn checkIn = new CheckIn(checkinDate);
+        int result = ColdMealManager.getColdMeals(checkIn);
 
         assertThat(result).isEqualTo(0);
     }
