@@ -55,4 +55,17 @@ public class ParticipantTest {
 
         assertThat(result).isFalse();
     }
+
+
+    @Test
+    public void dummy_benoit_business_service() {
+        final Participant participant = new Participant(
+                "Benoît",
+                new CheckInDate(LocalDateTime.of(2018, 10, 18, 21, 0))
+        );
+
+        final boolean result = participant.hasColdMeal();
+
+        assertThat(result).isFalse();
+    }
 }
