@@ -2,100 +2,29 @@ package fr.lacombe.socrates;
 
 import org.junit.Test;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ColdMealTest {
 
     @Test
-    public void should_return_number_of_cold_meal() {
-        //GIVEN
-        int nbParticipant = 0;
-
-        //WHEN
-        int result = ColdMeal.getColdMealCounter(new CheckinDate(nbParticipant));
-
-        //THEN
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void should_return_number_of_cold_meal_when_empty_list_of_participant() {
-        //GIVEN
-        int participantAfter9 = 0;
-
-        //WHEN
-        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
-
-        // THEN
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void should_return_number_of_cold_meal_when_empty_list_of_participant_1() {
-        //GIVEN
-        int participantAfter9 = 1;
-
-        //WHEN
-        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
-
-        // THEN
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void should_return_number_of_cold_meal_when_empty_list_of_participant_2() {
-        //GIVEN
-        int participantAfter9 = 2;
-
-        //WHEN
-        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
-
-        // THEN
-        assertThat(result).isEqualTo(2);
-    }
-
-    @Test
-    public void should_return_number_of_cold_meal_when_empty_list_of_participant_3() {
-        //GIVEN
-        int participantAfter9 = 3;
-
-        //WHEN
-        int result = ColdMeal.getColdMealCounter(new CheckinDate(participantAfter9));
-
-        // THEN
-        assertThat(result).isEqualTo(3);
-    }
-
-    @Test
-    public void should_return_participant_when_add_in_checkin_date() {
+    public void should_return_participant_when_it_is_thursday() {
         // Given LocalTime
-        LocalDate date = LocalDate.of(2018, 10, 18);
+        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(date));
+        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void should_return_participant_when_add_in_checkin_date_2() {
+    public void should_return_no_participant_when_it_is_after_thursday() {
         // Given LocalTime
-        LocalDate friday = LocalDate.of(2018, 10, 19);
-
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(friday));
-
-        // Then
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void should_return_participant_when_add_in_checkin_date_3() {
-        // Given LocalTime
-        LocalDate day = LocalDate.of(2018, 10, 23);
+        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 0, 0);
 
         // When
         int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
@@ -105,21 +34,9 @@ public class ColdMealTest {
     }
 
     @Test
-    public void should_return_participant_when_add_in_checkin_date_4() {
+    public void should_return_no_participant_when_it_is_before_thursday() {
         // Given LocalTime
-        LocalDate day = LocalDate.of(2018, 10, 25);
-
-        // When
-        int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void should_return_participant_when_add_in_checkin_date_5() {
-        // Given LocalTime
-        LocalDate day = LocalDate.of(2018, 10, 17);
+        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 17, 0, 0, 0);
 
         // When
         int result = ColdMeal.getColdMealCounter(CheckinDate.of(day));

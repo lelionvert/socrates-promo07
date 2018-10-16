@@ -1,6 +1,7 @@
 package fr.lacombe.socrates;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 public class CheckinDate {
     private final int participantAfter9;
@@ -9,21 +10,12 @@ public class CheckinDate {
         this.participantAfter9 = participantAfter9;
     }
 
-    public static CheckinDate of(LocalDate date) {
+    public static CheckinDate of(LocalDateTime date) {
 
-        if (date.equals(LocalDate.of(2018, 10, 17)))
-            return new CheckinDate(0);
-
-        if (date.equals(LocalDate.of(2018, 10, 25)))
-            return new CheckinDate(0);
-
-        if (date.equals(LocalDate.of(2018, 10, 23)))
-            return new CheckinDate(0);
-
-        if (date.equals(LocalDate.of(2018, 10, 19)))
-            return new CheckinDate(0);
-
-        return new CheckinDate(1);
+        if (date.equals(LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0, 0))) {
+            return new CheckinDate(1);
+        }
+        return new CheckinDate(0);
     }
 
     public int getParticipantAfter9() {
