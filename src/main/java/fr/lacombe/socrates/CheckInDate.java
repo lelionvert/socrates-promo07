@@ -11,6 +11,8 @@ class CheckInDate {
     }
 
     boolean isThursdayEvening() {
+        if(dateTime.getHour() == 0)
+            return false;
         if(dateTime.getMinute() == 1)
             return true;
         return false;
