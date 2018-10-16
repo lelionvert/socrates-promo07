@@ -1,28 +1,20 @@
 package fr.lacombe.socrates;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 
 public class ColdMealManager {
 
     public static int getColdMeals(LocalDateTime checkinDate) {
-        if (null == checkinDate)
-            return 0;
-        if (checkinDate.getDayOfWeek().equals(DayOfWeek.FRIDAY) && checkinDate.getMinute() > 0) {
-            return 0;
-        }
-        if (checkinDate.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
-            return 1;
-        }
-        if (checkinDate.getHour() < 21) {
+        LocalDateTime startTime = LocalDateTime.of(2018, 10, 18, 21, 0);
+        LocalDateTime endTime = LocalDateTime.of(2018, 10, 19, 0, 1);
+
+        if (null == checkinDate) {
             return 0;
         }
-        if (checkinDate.getHour() > 21) {
+        if (checkinDate.isBefore(endTime) && checkinDate.isAfter(startTime)) {
             return 1;
         }
-        if (checkinDate.getMinute() > 0) {
-            return 1;
-        }
+
         return 0;
     }
 }
