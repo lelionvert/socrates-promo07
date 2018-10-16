@@ -12,15 +12,11 @@ public class CheckinDate {
 
     public static CheckinDate of(LocalDateTime date) {
 
-        if(date.equals(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 0, 0)))
+        if(
+            date.isAfter(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0))
+        && date.isBefore(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0)))
             return new CheckinDate(1);
 
-        if(date.equals(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 45, 0)))
-            return new CheckinDate(1);
-
-        if (date.equals(LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0, 0))) {
-            return new CheckinDate(1);
-        }
         return new CheckinDate(0);
     }
 
