@@ -35,4 +35,13 @@ public class CheckInDateTest {
 
         assertThat(result).isTrue();
     }
+
+    @Test
+    public void should_be_thursday_evening_1() {
+        final CheckInDate checkInDate = new CheckInDate(LocalDateTime.of(2018, 10, 19, 0, 0));
+
+        final boolean result = checkInDate.isThursdayEvening();
+
+        assertThat(result).isTrue();
+    }
 }
