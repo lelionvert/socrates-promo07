@@ -4,14 +4,20 @@ import java.util.List;
 
 class Participants {
 
-    private Participants() {
+    private final List<Participant> participants;
+
+    private Participants(final List<Participant> participants) {
+        this.participants = participants;
     }
 
     static Participants of(final List<Participant> participants) {
-        return new Participants();
+        return new Participants(participants);
     }
 
-    int countColdMeals() {
-        return 0;
+    long countColdMeals() {
+        return participants
+                .stream()
+                .filter(Participant::hasColdMeal)
+                .count();
     }
 }
