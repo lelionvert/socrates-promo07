@@ -28,6 +28,17 @@ public class CheckInDateTest {
     }
 
     @Test
+    public void should_not_be_thursday_evening_2() {
+        final CheckInDate checkInDate = new CheckInDate(LocalDateTime.of(2018, 10, 18, 21, 0));
+
+        final boolean result = checkInDate.isThursdayEvening();
+
+        assertThat(result).isFalse();
+    }
+
+
+
+    @Test
     public void should_be_thursday_evening() {
         final CheckInDate checkInDate = new CheckInDate(LocalDateTime.of(2018, 10, 18, 21, 1));
 
@@ -43,5 +54,15 @@ public class CheckInDateTest {
         final boolean result = checkInDate.isThursdayEvening();
 
         assertThat(result).isTrue();
+    }
+
+    @Test
+    public void should_be_thursday_evening_2() {
+        final CheckInDate checkInDate = new CheckInDate(LocalDateTime.of(2018, 10, 18, 22, 0));
+
+        final boolean result = checkInDate.isThursdayEvening();
+
+        assertThat(result).isTrue();
+
     }
 }
