@@ -20,11 +20,7 @@ public class ColdMealManager {
         return new ColdMealManager(participant);
     }
 
-    public int getNumberOfColdMeals() {
-        if (participants.size() == 2) {
-            return 2;
-        }
-
-        return !participants.isEmpty() && participants.get(0).hasColdMeal() ? 1 : 0;
+    public long getNumberOfColdMeals() {
+        return participants.stream().filter(Participant::hasColdMeal).count();
     }
 }

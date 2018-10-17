@@ -34,7 +34,7 @@ public class ColdMealManagerTests {
     public void should_return_0_cold_meal_when_no_participant() {
         ColdMealManager coldMealManager = ColdMealManager.of();
 
-        int result = coldMealManager.getNumberOfColdMeals();
+        long result = coldMealManager.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(0);
     }
@@ -44,7 +44,7 @@ public class ColdMealManagerTests {
         Participant participant = new ParticipantHasColdMeal();
         ColdMealManager coldMealManager = ColdMealManager.of(participant);
 
-        int result = coldMealManager.getNumberOfColdMeals();
+        long result = coldMealManager.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(1);
     }
@@ -54,7 +54,7 @@ public class ColdMealManagerTests {
         Participant participant = new ParticipantHasNoColdMeal();
         ColdMealManager coldMealManager = ColdMealManager.of(participant);
 
-        int result = coldMealManager.getNumberOfColdMeals();
+        long result = coldMealManager.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(0);
     }
@@ -65,8 +65,21 @@ public class ColdMealManagerTests {
         Participant participant2 = new ParticipantHasColdMeal();
         ColdMealManager coldMealManager = ColdMealManager.of(participant1, participant2);
 
-        int result = coldMealManager.getNumberOfColdMeals();
+        long result = coldMealManager.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(2);
     }
+
+    @Test
+    public void should_return_1_cold_meals_when_1_participant_has_cold_meal_and_1_participant_has_no_cold_meal() {
+        Participant participant1 = new ParticipantHasColdMeal();
+        Participant participant2 = new ParticipantHasNoColdMeal();
+        ColdMealManager coldMealManager = ColdMealManager.of(participant1, participant2);
+
+        long result = coldMealManager.getNumberOfColdMeals();
+
+        assertThat(result).isEqualTo(1);
+    }
+
+
 }
