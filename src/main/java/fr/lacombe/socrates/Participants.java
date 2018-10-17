@@ -1,5 +1,6 @@
 package fr.lacombe.socrates;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -16,14 +17,15 @@ public class Participants {
         return new Participants(asList(participants));
     }
 
-    public int getColdMealNumber() {
+    public int getColdMealNumber(LocalDateTime startingTime, LocalDateTime endingTime) {
 
         int coldMealNumber = 0;
 
-        for (Participant participant : participants)
-            if(participant.checkInTime.isKitchenClosedAndReceptionOpened()) {
+        for (Participant participant : participants) {
+            if (participant.checkInTime.isKitchenClosedAndReceptionOpened(startingTime, endingTime)) {
                 coldMealNumber++;
             }
+        }
 
         return coldMealNumber;
     }

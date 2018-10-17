@@ -9,6 +9,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParticipantsTest {
 
+    private final LocalDateTime STARTING_TIME = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0);
+
+    private final LocalDateTime ENDING_TIME = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0);
+
     @Test
     public void should_return_no_cold_meal_when_participants_arrived_before_09PM() {
         //GIVEN
@@ -18,10 +22,9 @@ public class ParticipantsTest {
         final Participants participants = Participants.of(fred, ginette);
 
         //WHEN
-        int result = participants.getColdMealNumber();
+        int result = participants.getColdMealNumber(STARTING_TIME, ENDING_TIME);
 
         assertThat(result).isEqualTo(0);
-
     }
 
     @Test
@@ -33,7 +36,7 @@ public class ParticipantsTest {
         final Participants participants = Participants.of(fred, ginette);
 
         //WHEN
-        int result = participants.getColdMealNumber();
+        int result = participants.getColdMealNumber(STARTING_TIME, ENDING_TIME);
 
         assertThat(result).isEqualTo(1);
     }
@@ -49,7 +52,7 @@ public class ParticipantsTest {
         final Participants participants = Participants.of(fred, ginette, paulo, marion);
 
         //WHEN
-        int result = participants.getColdMealNumber();
+        int result = participants.getColdMealNumber(STARTING_TIME, ENDING_TIME);
 
         assertThat(result).isEqualTo(2);
     }
