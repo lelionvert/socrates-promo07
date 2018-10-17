@@ -1,7 +1,6 @@
 package fr.lacombe.socrates;
 
 import fr.lacombe.socrates.mock.CheckInDateMock;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -13,21 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MealsLedgerTest {
 
-    private Venue venue;
-
-    @Before
-    public void setUp() {
-        this.venue = new Venue(
-                LocalDateTime.of(2018, 10, 18, 21, 0),
-                LocalDateTime.of(2018, 10, 19, 0, 1)
-        );
-    }
+    private final Venue DUMMY_VENUE_MOCK = null;
 
     @Test
     public void should_not_serve_any_meal_when_there_is_no_participants() {
         final MealsLedger mealsLedger = MealsLedger.of(emptyList());
 
-        final long result = mealsLedger.countColdMeals(venue);
+        final long result = mealsLedger.countColdMeals(DUMMY_VENUE_MOCK);
 
         assertThat(result).isEqualTo(0);
     }
@@ -43,7 +34,7 @@ public class MealsLedgerTest {
         final List<CheckInDate> checkInDates = asList(canHaveColdMeal, canHaveColdMeal, cannotHaveColdMeal);
         final MealsLedger mealsLedger = MealsLedger.of(checkInDates);
 
-        final long result = mealsLedger.countColdMeals(venue);
+        final long result = mealsLedger.countColdMeals(DUMMY_VENUE_MOCK);
 
         assertThat(result).isEqualTo(2);
     }
