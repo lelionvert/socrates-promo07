@@ -2,21 +2,22 @@ package fr.lacombe.socrates;
 
 import java.time.LocalDateTime;
 
-public class CheckInDate {
+class CheckInDate {
 
-    private final Location location;
+    private final Venue venue;
     private final LocalDateTime arrivedDate;
 
-    private CheckInDate(LocalDateTime arrivedDate, Location location) {
+    private CheckInDate(LocalDateTime arrivedDate, Venue venue) {
         this.arrivedDate = arrivedDate;
-        this.location = location;
+        this.venue = venue;
     }
 
-    public static CheckInDate of(LocalDateTime date, Location location) {
-        return new CheckInDate(date, location);
+    static CheckInDate of(LocalDateTime date, Venue venue) {
+        return new CheckInDate(date, venue);
     }
 
-    public boolean isKitchenClosedAndReceptionOpened() {
-        return arrivedDate.isAfter(location.getStartColdMealDistribution()) && arrivedDate.isBefore(location.getEndColdMealDistribution());
+    boolean isAfterStartAndBeforeEndOfColdMealDistribution() {
+        return venue.arrivedDateIsAfterStartColdMealDistribution(arrivedDate)
+            && venue.arrivedDateIsBeforeEndColdMealDistribution(arrivedDate);
     }
 }

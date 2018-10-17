@@ -1,15 +1,13 @@
 package fr.lacombe.socrates;
 
-import java.time.LocalDateTime;
-
 class Participant {
     private final CheckInDate checkInTime;
 
-    public Participant(CheckInDate checkInTime) {
+    Participant(CheckInDate checkInTime) {
         this.checkInTime = checkInTime;
     }
 
-    public boolean hasColdMeal() {
-        return checkInTime.isKitchenClosedAndReceptionOpened();
+    boolean hasColdMeal() {
+        return checkInTime.isAfterStartAndBeforeEndOfColdMealDistribution();
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class Participants {
+class Participants {
 
     private final List<Participant> participants;
 
@@ -16,10 +16,9 @@ public class Participants {
         return new Participants(asList(participants));
     }
 
-    public int getColdMealNumber() {
-
+    int getColdMealNumber() {
         return (int) participants.stream()
-            .filter(participant -> participant.hasColdMeal())
+            .filter(Participant::hasColdMeal)
             .count();
     }
 }
