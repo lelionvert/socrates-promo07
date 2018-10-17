@@ -10,7 +10,9 @@ public class CheckIn {
         this.time = time;
     }
 
-    public LocalDateTime getTime() {
-        return time;
+    boolean isInKitchenClosePeriod(LocalDateTime kitchenCloseStartTime, LocalDateTime kitchenCloseEndTime) {
+        return null != time
+                && time.isAfter(kitchenCloseStartTime)
+                && time.isBefore(kitchenCloseEndTime);
     }
 }
