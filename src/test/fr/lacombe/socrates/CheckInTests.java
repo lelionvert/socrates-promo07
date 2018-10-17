@@ -17,7 +17,7 @@ public class CheckInTests {
 
         boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
 
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 
     @Test
@@ -27,7 +27,7 @@ public class CheckInTests {
 
         boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
 
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 
     @Test
@@ -37,7 +37,7 @@ public class CheckInTests {
 
         boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
 
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 
     @Test
@@ -47,7 +47,7 @@ public class CheckInTests {
 
         boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
 
-        assertThat(result).isEqualTo(true);
+        assertThat(result).isTrue();
     }
 
     @Test
@@ -57,7 +57,7 @@ public class CheckInTests {
 
         boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
 
-        assertThat(result).isEqualTo(true);
+        assertThat(result).isTrue();
     }
 
     @Test
@@ -67,6 +67,6 @@ public class CheckInTests {
 
         boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
 
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 }
