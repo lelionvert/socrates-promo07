@@ -7,81 +7,85 @@ import java.time.Month;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ColdMealTest {
-
-
+public class ParticipantsTest {
 
     @Test
-    public void should_return_no_participant_when_it_is_between_9PM_00AM() {
+    public void should_return_no_cold_meal_when_checkin_date_is_between_9PM_00AM() {
         // Given LocalTime
         LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 45, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckInDate.of(day));
+        int result = Participants.getColdMealNumber(CheckInDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void should_return_no_participant_when_it_is_before_9PM() {
+    public void should_return_no_cold_meal_when_checkin_date_is_before_9PM() {
         // Given LocalTime
         LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckInDate.of(day));
+        int result = Participants.getColdMealNumber(CheckInDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    public void should_return_no_participant_when_it_is_after_00_AM() {
+    public void should_return_no_cold_meal_when_checkin_date_is_after_00AM() {
         // Given LocalTime
         LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0);
 
         // When
-        int result = ColdMeal.getColdMealCounter(CheckInDate.of(day));
+        int result = Participants.getColdMealNumber(CheckInDate.of(day));
 
         // Then
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    public void shoudopjezifjzei() {
+    public void should_return_no_cold_meal_when_participants_arrived_before_09PM() {
         //GIVEN
         Participant fred = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0));
         Participant ginette = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 20, 7, 0));
 
+        final Participants participants = Participants.of(fred, ginette);
+
         //WHEN
-        int result = ColdMeal.getColdMealCounter(fred, ginette);
+        int result = participants.getColdMealNumber();
 
         assertThat(result).isEqualTo(0);
 
     }
 
     @Test
-    public void shoudopjezifjzei_1() {
+    public void should_return_one_cold_meal_when_one_participant_arrived_after_09PM() {
         //GIVEN
         Participant fred = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0));
         Participant ginette = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 1, 0));
 
+        final Participants participants = Participants.of(fred, ginette);
+
         //WHEN
-        int result = ColdMeal.getColdMealCounter(fred, ginette);
+        int result = participants.getColdMealNumber();
 
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void shoudopjezifjzei_2() {
+    public void should_return_cold_meal_with_multiple_participant() {
         //GIVEN
         Participant fred = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0));
         Participant ginette = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 1, 0));
         Participant paulo = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 0, 0));
         Participant marion = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0));
 
+        final Participants participants = Participants.of(fred, ginette, paulo, marion);
+
         //WHEN
-        int result = ColdMeal.getColdMealCounter(fred, ginette, paulo, marion);
+        int result = participants.getColdMealNumber();
 
         assertThat(result).isEqualTo(2);
     }

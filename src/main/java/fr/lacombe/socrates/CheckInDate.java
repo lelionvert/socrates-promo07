@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.time.Month;
 
 public class CheckInDate {
-    private final int participantAfter9;
+    private final int numberOfColdMeals;
 
-    private CheckInDate(int participantAfter9) {
-        this.participantAfter9 = participantAfter9;
+    private CheckInDate(int numberOfColdMeals) {
+        this.numberOfColdMeals = numberOfColdMeals;
     }
 
     public static CheckInDate of(LocalDateTime date) {
@@ -19,7 +19,7 @@ public class CheckInDate {
         return new CheckInDate(0);
     }
 
-    public int getParticipantAfter9() {
-        return participantAfter9;
+    public int getNumberOfColdMeals() {
+        return numberOfColdMeals;
     }
 }
