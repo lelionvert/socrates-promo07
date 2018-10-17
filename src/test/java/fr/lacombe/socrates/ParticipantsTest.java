@@ -9,14 +9,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParticipantsTest {
 
-    private final LocalDateTime KITCHEN_CLOSE_TIME = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0);
+    private final LocalDateTime DISTRIBUTION_COLD_MEAL_START_TIME = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0);
 
-    private final LocalDateTime RECEPTION_CLOSE_TIME = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0);
+    private final LocalDateTime DISTRIBUTION_COLD_MEAL_END_TIME = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0);
 
-    private final Venue venue = new Venue(KITCHEN_CLOSE_TIME, RECEPTION_CLOSE_TIME);
+    private final Venue venue = new Venue(DISTRIBUTION_COLD_MEAL_START_TIME, DISTRIBUTION_COLD_MEAL_END_TIME);
 
     @Test
-    public void should_return_no_cold_meal_when_participants_arrived_before_start_cold_meal_distribution() {
+    public void should_return_no_cold_meal_when_all_participants_arrived_before_start_cold_meal_distribution() {
         //GIVEN
         Participant fred = new Participant(CheckInDate.of(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0), venue));
         Participant ginette = new Participant(CheckInDate.of(LocalDateTime.of(2018, Month.OCTOBER, 18, 20, 7, 0), venue));
@@ -26,6 +26,7 @@ public class ParticipantsTest {
         //WHEN
         int result = participants.getColdMealNumber();
 
+        //THEN
         assertThat(result).isEqualTo(0);
     }
 
@@ -40,11 +41,12 @@ public class ParticipantsTest {
         //WHEN
         int result = participants.getColdMealNumber();
 
+        //THEN
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void should_return_cold_meal_with_multiple_participants() {
+    public void number_of_cold_meals_should_given_by_the_event_venue() {
         //GIVEN
         Participant fred = new Participant(CheckInDate.of(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0), venue));
         Participant ginette = new Participant(CheckInDate.of(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 1, 0), venue));
@@ -56,6 +58,7 @@ public class ParticipantsTest {
         //WHEN
         int result = participants.getColdMealNumber();
 
+        //THEN
         assertThat(result).isEqualTo(2);
     }
 }
