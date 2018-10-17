@@ -1,12 +1,13 @@
 package fr.lacombe.socrates;
 
+import fr.lacombe.socrates.resources.TestKitchenCloseTimeProvider;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ColdMealManagerTests {
+public class KitchenTests {
 
     class CheckInFalseMock extends CheckIn {
 
@@ -32,55 +33,55 @@ public class ColdMealManagerTests {
         }
     }
 
-    private TestKitchenCloseTimeProvider provider = new TestKitchenCloseTimeProvider();
+    private TestKitchenCloseTimeProvider kitchenCloseTimeProvider = new TestKitchenCloseTimeProvider();
 
     @Test
-    public void should_return_0_cold_meal_when_no_checkins() {
-        ColdMealManager coldMealManager = ColdMealManager.of(provider);
+    public void should_return_0_cold_meal_when_no_checkIns() {
+        Kitchen kitchen = Kitchen.of(kitchenCloseTimeProvider);
 
-        long result = coldMealManager.getNumberOfColdMeals();
+        long result = kitchen.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    public void should_return_1_cold_meal_when_checkin_is_in_kitchen_close_period() {
+    public void should_return_1_cold_meal_when_one_checkIn_is_in_kitchen_close_period() {
         CheckIn checkIn = new CheckInTrueMock();
-        ColdMealManager coldMealManager = ColdMealManager.of(provider, checkIn);
+        Kitchen kitchen = Kitchen.of(kitchenCloseTimeProvider, checkIn);
 
-        long result = coldMealManager.getNumberOfColdMeals();
+        long result = kitchen.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(1);
     }
 
     @Test
-    public void should_return_0_cold_meal_when_checkin_is_not_in_kitchen_close_period() {
+    public void should_return_0_cold_meal_when_one_checkIn_is_not_in_kitchen_close_period() {
         CheckIn checkIn = new CheckInFalseMock();
-        ColdMealManager coldMealManager = ColdMealManager.of(provider, checkIn);
+        Kitchen kitchen = Kitchen.of(kitchenCloseTimeProvider, checkIn);
 
-        long result = coldMealManager.getNumberOfColdMeals();
+        long result = kitchen.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(0);
     }
 
     @Test
-    public void should_return_2_cold_meals_when_2_participants_have_cold_meal() {
+    public void should_return_2_cold_meals_when_2_checkIns_are_in_kitchen_close_period() {
         CheckIn checkIn1 = new CheckInTrueMock();
         CheckIn checkIn2 = new CheckInTrueMock();
-        ColdMealManager coldMealManager = ColdMealManager.of(provider, checkIn1, checkIn2);
+        Kitchen kitchen = Kitchen.of(kitchenCloseTimeProvider, checkIn1, checkIn2);
 
-        long result = coldMealManager.getNumberOfColdMeals();
+        long result = kitchen.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(2);
     }
 
     @Test
-    public void should_return_1_cold_meals_when_1_participant_has_cold_meal_and_1_participant_has_no_cold_meal() {
+    public void should_return_1_cold_meals_when_1_checkIn_is_in_kitchen_close_period_and_one_is_not() {
         CheckIn checkInTrue = new CheckInTrueMock();
         CheckIn checkInFalse = new CheckInFalseMock();
-        ColdMealManager coldMealManager = ColdMealManager.of(provider, checkInTrue, checkInFalse);
+        Kitchen kitchen = Kitchen.of(kitchenCloseTimeProvider, checkInTrue, checkInFalse);
 
-        long result = coldMealManager.getNumberOfColdMeals();
+        long result = kitchen.getNumberOfColdMeals();
 
         assertThat(result).isEqualTo(1);
     }
