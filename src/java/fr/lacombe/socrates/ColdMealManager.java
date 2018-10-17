@@ -8,21 +8,24 @@ import static java.util.Arrays.asList;
 public class ColdMealManager {
 
     private final KitchenCloseTimeProvider provider;
-    private final List<Participant> participants;
+    private final List<CheckIn> checkIns;
 
-    private ColdMealManager(KitchenCloseTimeProvider provider, Participant[] participants) {
+    private ColdMealManager(KitchenCloseTimeProvider provider, CheckIn[] checkIns) {
         this.provider = provider;
-        this.participants = asList(participants);
+        this.checkIns = asList(checkIns);
     }
 
-    public static ColdMealManager of(KitchenCloseTimeProvider provider, Participant... participant) {
-        return new ColdMealManager(provider, participant);
+    public static ColdMealManager of(KitchenCloseTimeProvider provider, CheckIn... checkIns) {
+        return new ColdMealManager(provider, checkIns);
     }
 
     public long getNumberOfColdMeals() {
         LocalDateTime startTime = provider.getStartTime();
         LocalDateTime endTime = provider.getEndTime();
 
-        return participants.stream().filter(participant -> participant.hasColdMeal(startTime, endTime)).count();
+        return checkIns
+                .stream()
+                .filter(checkIn -> checkIn.isInKitchenClosePeriod(startTime, endTime))
+                .count();
     }
 }
