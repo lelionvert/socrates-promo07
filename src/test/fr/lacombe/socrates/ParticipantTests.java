@@ -41,6 +41,14 @@ public class ParticipantTests {
         boolean result = participant.hasColdMeal();
 
         assertThat(result).isFalse();
+    }
 
+    @Test
+    public void should_have_cold_meal_when_is_in_kitchen_closed_period() {
+        Participant participant = new Participant("Francis", new CheckInTrueMock());
+
+        boolean result = participant.hasColdMeal();
+
+        assertThat(result).isTrue();
     }
 }
