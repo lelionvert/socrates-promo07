@@ -6,19 +6,21 @@ import static java.util.Arrays.asList;
 
 class CheckInList {
 
+    private final Period period;
     private final List<CheckInDate> checkInDates;
 
-    private CheckInList(List<CheckInDate> checkInDates) {
+    private CheckInList(Period period, List<CheckInDate> checkInDates) {
+        this.period = period;
         this.checkInDates = checkInDates;
     }
 
-    static CheckInList of(CheckInDate... participants) {
-        return new CheckInList(asList(participants));
+    static CheckInList of(Period period, CheckInDate... checkInDates) {
+        return new CheckInList(period, asList(checkInDates));
     }
 
     int getColdMealNumber() {
         return (int) checkInDates.stream()
-            .filter(CheckInDate::isAfterStartAndBeforeEndOfColdMealDistribution)
+            .filter(period::contains)
             .count();
     }
 }

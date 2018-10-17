@@ -4,20 +4,18 @@ import java.time.LocalDateTime;
 
 class CheckInDate {
 
-    private final Venue venue;
     private final LocalDateTime arrivedDate;
 
-    private CheckInDate(LocalDateTime arrivedDate, Venue venue) {
+    private CheckInDate(LocalDateTime arrivedDate) {
         this.arrivedDate = arrivedDate;
-        this.venue = venue;
     }
 
-    static CheckInDate of(LocalDateTime date, Venue venue) {
-        return new CheckInDate(date, venue);
+    static CheckInDate of(LocalDateTime date) {
+        return new CheckInDate(date);
     }
 
-    boolean isAfterStartAndBeforeEndOfColdMealDistribution() {
-        return venue.arrivedDateIsAfterStartColdMealDistribution(arrivedDate)
-            && venue.arrivedDateIsBeforeEndColdMealDistribution(arrivedDate);
+    boolean isBetween(LocalDateTime start, LocalDateTime end) {
+        return arrivedDate.isAfter(start)
+            && arrivedDate.isBefore(end);
     }
 }
