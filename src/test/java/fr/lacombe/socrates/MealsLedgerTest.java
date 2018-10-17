@@ -37,8 +37,8 @@ public class MealsLedgerTest {
         final CheckInDateMock canHaveColdMeal = new CheckInDateMock(LocalDateTime.of(2018, 10, 18, 22, 0));
         final CheckInDateMock cannotHaveColdMeal = new CheckInDateMock(LocalDateTime.of(2018, 10, 19, 0, 30));
 
-        canHaveColdMeal.whenCallingIsThursdayEveningThenReturn(true);
-        cannotHaveColdMeal.whenCallingIsThursdayEveningThenReturn(false);
+        canHaveColdMeal.whenCallingIsColdMealTimeThenReturn(true);
+        cannotHaveColdMeal.whenCallingIsColdMealTimeThenReturn(false);
 
         final List<CheckInDate> checkInDates = asList(canHaveColdMeal, canHaveColdMeal, cannotHaveColdMeal);
         final MealsLedger mealsLedger = MealsLedger.of(checkInDates);

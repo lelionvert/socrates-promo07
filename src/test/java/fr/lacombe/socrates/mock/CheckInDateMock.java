@@ -13,7 +13,7 @@ public class CheckInDateMock extends CheckInDate {
         super(dateTime);
     }
 
-    public void whenCallingIsThursdayEveningThenReturn(final boolean isThursdayEvening) {
+    public void whenCallingIsColdMealTimeThenReturn(final boolean isThursdayEvening) {
         this.isThursdayEvening = isThursdayEvening;
     }
 
