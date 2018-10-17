@@ -10,42 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ParticipantsTest {
 
     @Test
-    public void should_return_no_cold_meal_when_checkin_date_is_between_9PM_00AM() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 45, 0);
-
-        // When
-        int result = Participants.getColdMealNumber(CheckInDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(1);
-    }
-
-    @Test
-    public void should_return_no_cold_meal_when_checkin_date_is_before_9PM() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0);
-
-        // When
-        int result = Participants.getColdMealNumber(CheckInDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
-    public void should_return_no_cold_meal_when_checkin_date_is_after_00AM() {
-        // Given LocalTime
-        LocalDateTime day = LocalDateTime.of(2018, Month.OCTOBER, 19, 0, 1, 0);
-
-        // When
-        int result = Participants.getColdMealNumber(CheckInDate.of(day));
-
-        // Then
-        assertThat(result).isEqualTo(0);
-    }
-
-    @Test
     public void should_return_no_cold_meal_when_participants_arrived_before_09PM() {
         //GIVEN
         Participant fred = new Participant(LocalDateTime.of(2018, Month.OCTOBER, 18, 21, 0, 0));

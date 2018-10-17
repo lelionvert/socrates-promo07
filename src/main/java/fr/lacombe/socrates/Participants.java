@@ -16,20 +16,14 @@ public class Participants {
         return new Participants(asList(participants));
     }
 
-    public static int getColdMealNumber(CheckInDate checkinDate) {
-
-        if (checkinDate.getNumberOfColdMeals() > 0)
-            return checkinDate.getNumberOfColdMeals();
-
-        return 0;
-    }
-
     public int getColdMealNumber() {
 
         int coldMealNumber = 0;
 
         for (Participant participant : participants)
-            coldMealNumber += getColdMealNumber(CheckInDate.of(participant.checkInTime));
+            if(CheckInDate.of(participant.checkInTime).isKitchenClosed()) {
+                coldMealNumber++;
+            }
 
         return coldMealNumber;
     }
