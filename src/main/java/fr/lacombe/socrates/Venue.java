@@ -2,7 +2,7 @@ package fr.lacombe.socrates;
 
 import java.time.LocalDateTime;
 
-class Venue {
+public class Venue {
     private final LocalDateTime kitchenClosingTime;
     private final LocalDateTime deskClosingTime;
 
