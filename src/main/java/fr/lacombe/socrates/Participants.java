@@ -13,20 +13,14 @@ public class Participants {
         this.participants = participants;
     }
 
-    public static Participants of(Participant... participants) {
+    static Participants of(Participant... participants) {
         return new Participants(asList(participants));
     }
 
-    public int getColdMealNumber(LocalDateTime startingTime, LocalDateTime endingTime) {
+    public int getColdMealNumber(LocalDateTime kitchenCloseTime, LocalDateTime receptionCloseTime) {
 
-        int coldMealNumber = 0;
-
-        for (Participant participant : participants) {
-            if (participant.checkInTime.isKitchenClosedAndReceptionOpened(startingTime, endingTime)) {
-                coldMealNumber++;
-            }
-        }
-
-        return coldMealNumber;
+        return (int) participants.stream()
+            .filter(participant -> participant.hasColdMeal(kitchenCloseTime, receptionCloseTime))
+            .count();
     }
 }

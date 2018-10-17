@@ -14,11 +14,8 @@ public class CheckInDate {
         return new CheckInDate(date);
     }
 
-    public boolean isKitchenClosedAndReceptionOpened(LocalDateTime startingTime, LocalDateTime endingTime) {
+    public boolean isKitchenClosedAndReceptionOpened(LocalDateTime kitchenCloseTime, LocalDateTime receptionCloseTime) {
+        return arrivedDate.isAfter(kitchenCloseTime) && arrivedDate.isBefore(receptionCloseTime);
 
-        if (arrivedDate.isAfter(startingTime) && arrivedDate.isBefore(endingTime))
-            return true;
-
-        return false;
     }
 }
