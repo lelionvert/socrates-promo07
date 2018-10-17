@@ -9,7 +9,7 @@ class Participant {
         this.checkInTime = checkInTime;
     }
 
-    public boolean hasColdMeal(LocalDateTime kitchenCloseTime, LocalDateTime receptionCloseTime) {
-        return checkInTime.isKitchenClosedAndReceptionOpened(kitchenCloseTime, receptionCloseTime);
+    public boolean hasColdMeal() {
+        return checkInTime.isKitchenClosedAndReceptionOpened();
     }
 }
