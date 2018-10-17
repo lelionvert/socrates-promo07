@@ -19,7 +19,7 @@ public class CheckInDate {
         return new CheckInDate(false);
     }
 
-    public boolean isKitchenClosed() {
+    public boolean isKitchenClosedAndReceptionOpened() {
         return isKitchenClosed;
     }
 }

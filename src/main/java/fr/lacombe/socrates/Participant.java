@@ -1,11 +1,9 @@
 package fr.lacombe.socrates;
 
-import java.time.LocalDateTime;
-
 class Participant {
-    public final LocalDateTime checkInTime;
+    public final CheckInDate checkInTime;
 
-    public Participant(LocalDateTime checkInTime) {
+    public Participant(CheckInDate checkInTime) {
 
         this.checkInTime = checkInTime;
     }

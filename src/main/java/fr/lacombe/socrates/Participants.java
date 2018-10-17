@@ -21,7 +21,7 @@ public class Participants {
         int coldMealNumber = 0;
 
         for (Participant participant : participants)
-            if(CheckInDate.of(participant.checkInTime).isKitchenClosed()) {
+            if(participant.checkInTime.isKitchenClosedAndReceptionOpened()) {
                 coldMealNumber++;
             }
 
