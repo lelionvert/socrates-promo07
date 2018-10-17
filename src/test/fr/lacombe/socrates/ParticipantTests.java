@@ -1,7 +1,5 @@
 package fr.lacombe.socrates;
 
-import org.assertj.core.api.Assertions;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -34,11 +32,13 @@ public class ParticipantTests {
         }
     }
 
+    private TestKitchenCloseTimeProvider provider = new TestKitchenCloseTimeProvider();
+
     @Test
     public void should_have_no_cold_meal_when_is_not_in_kitchen_closed_period() {
         Participant participant = new Participant("Francis", new CheckInFalseMock());
 
-        boolean result = participant.hasColdMeal();
+        boolean result = participant.hasColdMeal(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isFalse();
     }
@@ -47,7 +47,7 @@ public class ParticipantTests {
     public void should_have_cold_meal_when_is_in_kitchen_closed_period() {
         Participant participant = new Participant("Francis", new CheckInTrueMock());
 
-        boolean result = participant.hasColdMeal();
+        boolean result = participant.hasColdMeal(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isTrue();
     }

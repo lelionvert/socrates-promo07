@@ -7,15 +7,14 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckInTests {
-
-    private static final LocalDateTime KITCHEN_CLOSE_START_TIME = LocalDateTime.of(2018, 10, 18, 21, 0);
-    private static final LocalDateTime KITCHEN_CLOSE_END_TIME = LocalDateTime.of(2018, 10, 19, 0, 1);
+    
+    private TestKitchenCloseTimeProvider provider = new TestKitchenCloseTimeProvider();
 
     @Test
     public void should_return_false_when_checkin_time_is_null() {
         CheckIn checkIn = new CheckIn(null);
 
-        boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+        boolean result = checkIn.isInKitchenClosePeriod(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isFalse();
     }
@@ -25,7 +24,7 @@ public class CheckInTests {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 18, 20, 1);
         CheckIn checkIn = new CheckIn(checkinDate);
 
-        boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+        boolean result = checkIn.isInKitchenClosePeriod(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isFalse();
     }
@@ -35,7 +34,7 @@ public class CheckInTests {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 18, 21, 0);
         CheckIn checkIn = new CheckIn(checkinDate);
 
-        boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+        boolean result = checkIn.isInKitchenClosePeriod(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isFalse();
     }
@@ -45,7 +44,7 @@ public class CheckInTests {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 18, 21, 1);
         CheckIn checkIn = new CheckIn(checkinDate);
 
-        boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+        boolean result = checkIn.isInKitchenClosePeriod(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isTrue();
     }
@@ -55,7 +54,7 @@ public class CheckInTests {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 19, 0, 0);
         CheckIn checkIn = new CheckIn(checkinDate);
 
-        boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+        boolean result = checkIn.isInKitchenClosePeriod(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isTrue();
     }
@@ -65,7 +64,7 @@ public class CheckInTests {
         LocalDateTime checkinDate = LocalDateTime.of(2018, 10, 19, 0, 1);
         CheckIn checkIn = new CheckIn(checkinDate);
 
-        boolean result = checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+        boolean result = checkIn.isInKitchenClosePeriod(provider.getStartTime(), provider.getEndTime());
 
         assertThat(result).isFalse();
     }

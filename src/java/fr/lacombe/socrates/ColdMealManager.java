@@ -7,20 +7,22 @@ import static java.util.Arrays.asList;
 
 public class ColdMealManager {
 
-    public static final LocalDateTime KITCHEN_CLOSE_START_TIME = LocalDateTime.of(2018, 10, 18, 21, 0);
-    public static final LocalDateTime KITCHEN_CLOSE_END_TIME = LocalDateTime.of(2018, 10, 19, 0, 1);
-
+    private final KitchenCloseTimeProvider provider;
     private final List<Participant> participants;
 
-    private ColdMealManager(Participant[] participants) {
+    private ColdMealManager(KitchenCloseTimeProvider provider, Participant[] participants) {
+        this.provider = provider;
         this.participants = asList(participants);
     }
 
-    public static ColdMealManager of(Participant... participant) {
-        return new ColdMealManager(participant);
+    public static ColdMealManager of(KitchenCloseTimeProvider provider, Participant... participant) {
+        return new ColdMealManager(provider, participant);
     }
 
     public long getNumberOfColdMeals() {
-        return participants.stream().filter(Participant::hasColdMeal).count();
+        LocalDateTime startTime = provider.getStartTime();
+        LocalDateTime endTime = provider.getEndTime();
+
+        return participants.stream().filter(participant -> participant.hasColdMeal(startTime, endTime)).count();
     }
 }

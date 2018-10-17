@@ -1,7 +1,6 @@
 package fr.lacombe.socrates;
 
-import static fr.lacombe.socrates.ColdMealManager.KITCHEN_CLOSE_END_TIME;
-import static fr.lacombe.socrates.ColdMealManager.KITCHEN_CLOSE_START_TIME;
+import java.time.LocalDateTime;
 
 public class Participant {
 
@@ -13,7 +12,7 @@ public class Participant {
         this.checkIn = checkIn;
     }
 
-    public boolean hasColdMeal() {
-        return checkIn.isInKitchenClosePeriod(KITCHEN_CLOSE_START_TIME, KITCHEN_CLOSE_END_TIME);
+    public boolean hasColdMeal(LocalDateTime kitchenCloseStartTime, LocalDateTime kitchenCloseEndTime) {
+        return checkIn.isInKitchenClosePeriod(kitchenCloseStartTime, kitchenCloseEndTime);
     }
 }
