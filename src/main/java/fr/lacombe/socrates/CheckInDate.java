@@ -1,9 +1,15 @@
 package fr.lacombe.socrates;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.THURSDAY;
 
 class CheckInDate {
+
+    private static final LocalTime KITCHEN_CLOSING_TIME = LocalTime.of(21, 0);
+    private static final LocalTime DESK_CLOSING_TIME = LocalTime.of(0, 1);
 
     private final LocalDateTime dateTime;
 
@@ -12,9 +18,16 @@ class CheckInDate {
     }
 
     boolean isThursdayEvening() {
-        final boolean isThursdayEvening = dateTime.getDayOfWeek() == DayOfWeek.THURSDAY && (dateTime.getHour() == 21 && dateTime.getMinute() > 0 || dateTime.getHour() >= 22);
-        final boolean isFridayMidnight = dateTime.getDayOfWeek() == DayOfWeek.FRIDAY && dateTime.getHour() == 0 && dateTime.getMinute() == 0;
+        return isKitchenClosed() || isDeskOpen();
+    }
 
-        return isThursdayEvening || isFridayMidnight;
+    private boolean isDeskOpen() {
+        return dateTime.getDayOfWeek() == FRIDAY
+                && dateTime.toLocalTime().isBefore(DESK_CLOSING_TIME);
+    }
+
+    private boolean isKitchenClosed() {
+        return dateTime.getDayOfWeek() == THURSDAY
+                && dateTime.toLocalTime().isAfter(KITCHEN_CLOSING_TIME);
     }
 }

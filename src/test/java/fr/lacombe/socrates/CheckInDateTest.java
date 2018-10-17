@@ -8,8 +8,26 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckInDateTest {
 
+    static class CheckInDateMock extends CheckInDate {
+
+        private boolean isThursdayEvening;
+
+        CheckInDateMock(final LocalDateTime dateTime) {
+            super(dateTime);
+        }
+
+        void whenCallingIsThursdayEveningThenReturn(final boolean isThursdayEvening) {
+            this.isThursdayEvening = isThursdayEvening;
+        }
+
+        @Override
+        boolean isThursdayEvening() {
+            return isThursdayEvening;
+        }
+    }
+
     @Test
-    public void should_not_be_thursday_evening_when_it_is_too_early() {
+    public void should_not_be_thursday_evening_before_starting_hour() {
         final CheckInDate checkInDate = new CheckInDate(LocalDateTime.of(2018, 10, 18, 19, 45));
 
         final boolean result = checkInDate.isThursdayEvening();
@@ -18,7 +36,7 @@ public class CheckInDateTest {
     }
 
     @Test
-    public void should_not_be_thursday_evening_when_it_is_too_late() {
+    public void should_not_be_thursday_evening_after_ending_hour() {
         final CheckInDate checkInDate = new CheckInDate(LocalDateTime.of(2018, 10, 19, 0, 1));
 
         final boolean result = checkInDate.isThursdayEvening();
