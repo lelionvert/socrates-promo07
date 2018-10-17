@@ -58,4 +58,15 @@ public class ColdMealManagerTests {
 
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    public void should_return_2_cold_meals_when_2_participants_have_cold_meal() {
+        Participant participant1 = new ParticipantHasColdMeal();
+        Participant participant2 = new ParticipantHasColdMeal();
+        ColdMealManager coldMealManager = ColdMealManager.of(participant1, participant2);
+
+        int result = coldMealManager.getNumberOfColdMeals();
+
+        assertThat(result).isEqualTo(2);
+    }
 }
