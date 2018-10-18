@@ -17,4 +17,17 @@ public class PriceCalculationTest {
         // THEN
         Assertions.assertThat(result).isEqualTo(accomodationPrice);
     }
+
+    @Test
+    public void should_return_accomodation_price_when_complete_price_double_room() {
+        // GIVEN
+        int accomodationPrice = 510;
+        PriceCalculation priceCalculation = new PriceCalculation();
+
+        // WHEN
+        int result = priceCalculation.compute(accomodationPrice);
+
+        // THEN
+        Assertions.assertThat(result).isEqualTo(accomodationPrice);
+    }
 }
