@@ -19,21 +19,34 @@ class MissedMeals {
     }
 
     static MissedMeals of(LocalDateTime checkIn, LocalDateTime checkOut) {
-        LocalDate secondDayOfConference = LocalDate.of(2018, Month.OCTOBER, 19);
-
         final LocalTime checkInTime = checkIn.toLocalTime();
         final LocalDate checkInDate = checkIn.toLocalDate();
 
-        TimePeriod loseMealTimePeriod = new TimePeriod(LocalTime.of(0, 0, 0), LocalTime.of(14, 0, 0));
+        LocalDate secondDayOfConference = LocalDate.of(2018, Month.OCTOBER, 19);
+        LocalDate thirdDayOfConference = LocalDate.of(2018, Month.OCTOBER, 20);
 
-        if (checkInDate.equals(secondDayOfConference) &&
-            (checkInTime.equals(LocalTime.of(14, 0, 0)))) {
+        TimePeriod morning = new TimePeriod(
+            LocalTime.of(0, 0, 0),
+            LocalTime.of(14, 0, 0)
+        );
+        TimePeriod afternoon = new TimePeriod(
+            LocalTime.of(14, 0, 0),
+            LocalTime.of(0, 0, 0)
+        );
+
+        if (checkInDate.equals(thirdDayOfConference)
+            && morning.contains(checkInTime)) {
+            return new MissedMeals(3);
+        }
+        if (checkInDate.equals(secondDayOfConference)
+            && afternoon.contains(checkInTime)) {
             return new MissedMeals(2);
         }
-
-        if (checkInDate.equals(secondDayOfConference) && loseMealTimePeriod.contains(checkInTime)) {
+        if (checkInDate.equals(secondDayOfConference)
+            && morning.contains(checkInTime)) {
             return new MissedMeals(1);
         }
+
         return new MissedMeals(0);
     }
 
