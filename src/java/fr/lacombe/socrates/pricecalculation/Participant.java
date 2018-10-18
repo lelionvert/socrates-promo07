@@ -3,18 +3,18 @@ package fr.lacombe.socrates.pricecalculation;
 public class Participant {
 
     private final Journey journey;
-    private final HostelBill hostelBill;
+    private final Accommodation accommodation;
 
-    private Participant(Journey journey, HostelBill hostelBill) {
+    private Participant(Journey journey, Accommodation accommodation) {
         this.journey = journey;
-        this.hostelBill = hostelBill;
+        this.accommodation = accommodation;
     }
 
-    public static Participant of(Journey journey, HostelBill hostelBill) {
-        return new Participant(journey, hostelBill);
+    public static Participant of(Journey journey, Accommodation accommodation) {
+        return new Participant(journey, accommodation);
     }
 
     public int computeParticipationPrice() {
-        return hostelBill.computeParticipationPrice(journey);
+        return accommodation.computeParticipationPrice(journey.getNumberOfMissingMeals(), 40);
     }
 }
