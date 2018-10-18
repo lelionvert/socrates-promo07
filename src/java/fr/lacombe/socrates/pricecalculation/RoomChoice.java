@@ -1,7 +1,8 @@
 package fr.lacombe.socrates.pricecalculation;
 
 public enum RoomChoice {
-    SINGLE(610);
+    SINGLE(610),
+    DOUBLE(510);
 
     private final int basePrice;
 
@@ -10,6 +11,6 @@ public enum RoomChoice {
     }
 
     public int calculateParticipationPrice(Journey journey) {
-        return 610;
+        return basePrice;
     }
 }
