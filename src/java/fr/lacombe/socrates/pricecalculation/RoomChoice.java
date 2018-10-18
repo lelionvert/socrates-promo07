@@ -12,7 +12,8 @@ public enum RoomChoice {
         this.basePrice = basePrice;
     }
 
-    public int calculateParticipationPrice(Journey journey) {
-        return basePrice;
+    public int computeParticipationPrice(Journey journey) {
+        int mealPrice = 40;
+        return basePrice - journey.getNumberOfMissingMeals() * mealPrice;
     }
 }

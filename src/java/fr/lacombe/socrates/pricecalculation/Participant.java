@@ -14,7 +14,7 @@ public class Participant {
         return new Participant(journey, roomChoice);
     }
 
-    public int getParticipationPrice() {
-        return roomChoice.calculateParticipationPrice(journey);
+    public int computeParticipationPrice() {
+        return roomChoice.computeParticipationPrice(journey);
     }
 }
