@@ -1,4 +1,4 @@
-package fr.lacombe.socrates;
+package fr.lacombe.socrates.price;
 
 public enum Accommodation {
     SINGLE(Price.of(610)),

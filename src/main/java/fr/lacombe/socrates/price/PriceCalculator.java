@@ -1,4 +1,4 @@
-package fr.lacombe.socrates;
+package fr.lacombe.socrates.price;
 
 class PriceCalculator {
 

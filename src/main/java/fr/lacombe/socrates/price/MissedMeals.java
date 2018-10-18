@@ -1,4 +1,4 @@
-package fr.lacombe.socrates;
+package fr.lacombe.socrates.price;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,16 +16,9 @@ class MissedMeals {
     }
 
     static MissedMeals of(LocalDateTime checkIn, LocalDateTime checkOut) {
-        if(checkIn.isEqual(LocalDateTime.of(2018, 10, 20, 10, 0, 0))) {
-            return new MissedMeals(3);
-        }
-        if(checkIn.isEqual(LocalDateTime.of(2018, 10, 19, 15, 0, 0))) {
-            return new MissedMeals(2);
-        }
-        if(checkIn.isEqual(LocalDateTime.of(2018, 10, 19, 10, 0, 0))) {
+        if(checkIn.equals(LocalDateTime.of(2018, 10, 19, 10, 0, 0))) {
             return new MissedMeals(1);
         }
-
         return new MissedMeals(0);
     }
 
