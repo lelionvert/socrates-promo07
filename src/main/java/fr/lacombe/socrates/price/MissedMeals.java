@@ -31,9 +31,14 @@ class MissedMeals {
         );
         TimePeriod afternoon = new TimePeriod(
             LocalTime.of(14, 0, 0),
-            LocalTime.of(0, 0, 0)
+            LocalTime.of(23, 59, 59)
         );
 
+
+        if (checkInDate.equals(thirdDayOfConference)
+            && afternoon.contains(checkInTime)) {
+            return new MissedMeals(4);
+        }
         if (checkInDate.equals(thirdDayOfConference)
             && morning.contains(checkInTime)) {
             return new MissedMeals(3);
@@ -65,5 +70,12 @@ class MissedMeals {
     @Override
     public int hashCode() {
         return Objects.hash(numberOfMeals);
+    }
+
+    @Override
+    public String toString() {
+        return "MissedMeals{" +
+            "numberOfMeals=" + numberOfMeals +
+            '}';
     }
 }

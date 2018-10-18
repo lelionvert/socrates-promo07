@@ -77,4 +77,14 @@ public class MissedMealsTest {
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(3));
     }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_8() {
+        final LocalDateTime checkIn = LocalDateTime.of(2018, 10, 20, 15, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, 10, 21, 15, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(checkIn, checkOut);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(4));
+    }
 }
