@@ -1,15 +1,33 @@
 package fr.lacombe.socrates.pricecalculation;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 
-import javax.print.attribute.standard.JobHoldUntil;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import static org.junit.Assert.*;
-
 public class JourneyTest {
+
+    private class ConferenceDatesProviderTest implements ConferenceDatesProvider {
+
+        @Override
+        public LocalDateTime getBeginning() {
+            return LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0);
+        }
+
+        @Override
+        public LocalDateTime getEnding() {
+            return LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
+        }
+    }
+
+    private ConferenceDatesProviderTest conferenceDatesProviderTest;
+
+    @Before
+    public void initTest() {
+        conferenceDatesProviderTest = new ConferenceDatesProviderTest();
+    }
 
     private Journey getJourney(LocalDateTime checkIn, LocalDateTime checkOut) {
         return new Journey.JourneyBuilder()
@@ -24,7 +42,7 @@ public class JourneyTest {
         LocalDateTime checkOutAtConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
         Journey completeJourney = getJourney(checkInAtConfBeginning, checkOutAtConfEnding);
 
-        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals();
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
 
         Assertions.assertThat(numberOfMissingMeals).isEqualTo(0);
     }
@@ -35,7 +53,7 @@ public class JourneyTest {
         LocalDateTime checkOutAtConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
         Journey completeJourney = getJourney(checkInOneDayAfterConfBeginning, checkOutAtConfEnding);
 
-        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals();
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
 
         Assertions.assertThat(numberOfMissingMeals).isEqualTo(1);
     }
@@ -46,7 +64,7 @@ public class JourneyTest {
         LocalDateTime checkOutOneDayBeforeConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 20, 18, 0);
         Journey completeJourney = getJourney(checkInAtConfBeginning, checkOutOneDayBeforeConfEnding);
 
-        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals();
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
 
         Assertions.assertThat(numberOfMissingMeals).isEqualTo(1);
     }
@@ -57,7 +75,7 @@ public class JourneyTest {
         LocalDateTime checkOutOneDayBeforeConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 20, 18, 0);
         Journey completeJourney = getJourney(checkInOneDayAfterConfBeginning, checkOutOneDayBeforeConfEnding);
 
-        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals();
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
 
         Assertions.assertThat(numberOfMissingMeals).isEqualTo(2);
     }

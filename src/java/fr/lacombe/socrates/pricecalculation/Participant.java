@@ -1,5 +1,8 @@
 package fr.lacombe.socrates.pricecalculation;
 
+import java.time.LocalDateTime;
+import java.time.Month;
+
 public class Participant {
 
     private final Journey journey;
@@ -15,6 +18,6 @@ public class Participant {
     }
 
     public int computeParticipationPrice() {
-        return accommodation.computeParticipationPrice(journey.getNumberOfMissingMeals(), 40);
+        throw new UnsupportedOperationException();
     }
 }
