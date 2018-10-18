@@ -9,15 +9,6 @@ class Participant {
     }
 
     Price duePrice() {
-        if(accommodation == Accommodation.NONE) {
-            return Price.of(240);
-        }
-        if(accommodation == Accommodation.TRIPLE) {
-            return Price.of(410);
-        }
-        if(accommodation == Accommodation.DOUBLE) {
-            return Price.of(510);
-        }
-        return Price.of(610);
+        return accommodation.price;
     }
 }
