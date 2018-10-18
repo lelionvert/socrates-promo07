@@ -17,7 +17,7 @@ public class ParticipantTest {
     public void calculate_the_price_without_meal_reduction(Accommodation accommodation, int accommodationPrice ) {
         Participant participant = new Participant(accommodation);
 
-        Price price = participant.duePrice(0);
+        Price price = participant.duePrice(new MissingMeals(0));
 
         assertThat(price).isEqualTo(Price.of(accommodationPrice));
     }
@@ -26,7 +26,7 @@ public class ParticipantTest {
     public void should_return_the_price_for_single_accommodation_minus_one_meal() {
         Participant participant = new Participant(Accommodation.SINGLE);
 
-        Price price = participant.duePrice(1);
+        Price price = participant.duePrice(new MissingMeals(1));
 
         assertThat(price).isEqualTo(Price.of(570));
     }
@@ -35,7 +35,7 @@ public class ParticipantTest {
     public void should_return_the_price_for_single_accommodation_minus_two_meals() {
         Participant participant = new Participant(Accommodation.SINGLE);
 
-        Price price = participant.duePrice(2);
+        Price price = participant.duePrice(new MissingMeals(2));
 
         assertThat(price).isEqualTo(Price.of(530));
     }
