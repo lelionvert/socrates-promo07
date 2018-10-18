@@ -14,5 +14,4 @@ class Period {
     boolean contains(CheckInDate checkInDate) {
         return checkInDate.isBetween(start, end);
     }
-
 }
