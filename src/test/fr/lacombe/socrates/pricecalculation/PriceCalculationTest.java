@@ -1,46 +1,23 @@
 package fr.lacombe.socrates.pricecalculation;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
+
+import java.time.LocalDateTime;
+import java.time.Month;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PriceCalculationTest {
 
     @Test
     public void should_return_accomodation_price_when_complete_price_single_room() {
-        // GIVEN
-        int accomodationPrice = 610;
-        PriceCalculation priceCalculation = new PriceCalculation();
+        LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, 18, 18, 0);
+        LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 14, 0);
+        Journey journey = Journey.of(checkIn, checkOut);
+        Participant participant = Participant.of(journey, RoomChoice.SINGLE);
 
-        // WHEN
-        int result = priceCalculation.compute(accomodationPrice);
+        int totalPrice = participant.getParticipationPrice();
 
-        // THEN
-        Assertions.assertThat(result).isEqualTo(accomodationPrice);
-    }
-
-    @Test
-    public void should_return_accomodation_price_when_complete_price_double_room() {
-        // GIVEN
-        int accomodationPrice = 510;
-        PriceCalculation priceCalculation = new PriceCalculation();
-
-        // WHEN
-        int result = priceCalculation.compute(accomodationPrice);
-
-        // THEN
-        Assertions.assertThat(result).isEqualTo(accomodationPrice);
-    }
-
-    @Test
-    public void should_return_accomodation_price_when_complete_price_triple_room() {
-        // GIVEN
-        int accomodationPrice = 410;
-        PriceCalculation priceCalculation = new PriceCalculation();
-
-        // WHEN
-        int result = priceCalculation.compute(accomodationPrice);
-
-        // THEN
-        Assertions.assertThat(result).isEqualTo(accomodationPrice);
+        assertThat(totalPrice).isEqualTo(610);
     }
 }
