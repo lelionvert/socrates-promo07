@@ -8,7 +8,7 @@ class Participant {
         this.accommodation = accommodation;
     }
 
-    Price duePrice(MissingMeals missingMeals) {
-        return accommodation.deduce(missingMeals.calculatePrice());
+    Price duePrice(MissedMeals missedMeals) {
+        return accommodation.deduce(missedMeals.calculatePrice());
     }
 }

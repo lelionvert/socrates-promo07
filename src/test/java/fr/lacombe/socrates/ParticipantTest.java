@@ -17,25 +17,25 @@ public class ParticipantTest {
     public void calculate_the_price_without_meal_reduction(Accommodation accommodation, int accommodationPrice ) {
         Participant participant = new Participant(accommodation);
 
-        Price price = participant.duePrice(new MissingMeals(0));
+        Price price = participant.duePrice(new MissedMeals(0));
 
         assertThat(price).isEqualTo(Price.of(accommodationPrice));
     }
 
     @Test
-    public void should_return_the_price_for_single_accommodation_minus_one_meal() {
+    public void calculate_the_price_for_single_accommodation_minus_one_meal() {
         Participant participant = new Participant(Accommodation.SINGLE);
 
-        Price price = participant.duePrice(new MissingMeals(1));
+        Price price = participant.duePrice(new MissedMeals(1));
 
         assertThat(price).isEqualTo(Price.of(570));
     }
 
     @Test
-    public void should_return_the_price_for_single_accommodation_minus_two_meals() {
+    public void calculate_the_price_for_single_accommodation_minus_two_meals() {
         Participant participant = new Participant(Accommodation.SINGLE);
 
-        Price price = participant.duePrice(new MissingMeals(2));
+        Price price = participant.duePrice(new MissedMeals(2));
 
         assertThat(price).isEqualTo(Price.of(530));
     }
