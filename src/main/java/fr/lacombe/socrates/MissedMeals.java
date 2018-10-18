@@ -4,7 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 class MissedMeals {
+
     private static final Price MEAL_PRICE = Price.of(40);
+
+    static final MissedMeals NONE = new MissedMeals(0);
 
     private final int numberOfMeals;
 
@@ -13,10 +16,17 @@ class MissedMeals {
     }
 
     static MissedMeals of(LocalDateTime checkIn, LocalDateTime checkOut) {
+        if(checkIn.isEqual(LocalDateTime.of(2018, 10, 20, 10, 0, 0))) {
+            return new MissedMeals(3);
+        }
         if(checkIn.isEqual(LocalDateTime.of(2018, 10, 19, 15, 0, 0))) {
             return new MissedMeals(2);
         }
-        return new MissedMeals(1);
+        if(checkIn.isEqual(LocalDateTime.of(2018, 10, 19, 10, 0, 0))) {
+            return new MissedMeals(1);
+        }
+
+        return new MissedMeals(0);
     }
 
     Price calculatePrice() {

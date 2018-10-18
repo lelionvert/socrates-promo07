@@ -27,4 +27,24 @@ public class MissedMealsTest {
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(2));
     }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_3() {
+        final LocalDateTime saturdayBeforeLunch = LocalDateTime.of(2018, 10, 20, 10, 0, 0);
+        final LocalDateTime sundayAfterLunch = LocalDateTime.of(2018, 10, 19, 17, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(saturdayBeforeLunch, sundayAfterLunch);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(3));
+    }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_4() {
+        final LocalDateTime thursdayAfterLunch = LocalDateTime.of(2018, 10, 18, 18, 0, 0);
+        final LocalDateTime sundayAfterLunch = LocalDateTime.of(2018, 10, 19, 17, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(thursdayAfterLunch, sundayAfterLunch);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(0));
+    }
 }
