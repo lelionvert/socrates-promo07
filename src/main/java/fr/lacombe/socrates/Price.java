@@ -14,6 +14,10 @@ class Price {
         return new Price(value);
     }
 
+    Price deduce(int value) {
+        return Price.of(this.value - value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

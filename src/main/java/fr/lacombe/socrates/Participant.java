@@ -8,14 +8,7 @@ class Participant {
         this.accommodation = accommodation;
     }
 
-    Price duePrice() {
-        return accommodation.price;
-    }
-
-    Price duePrice(int numberOfMissedMeals) {
-        if(numberOfMissedMeals == 2) {
-            return Price.of(610 - 2*40);
-        }
-        return Price.of(610 - 40);
+    Price duePrice(int numberOfMeals) {
+        return accommodation.price.deduce(numberOfMeals * 40);
     }
 }

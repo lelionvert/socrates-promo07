@@ -12,7 +12,7 @@ public class ParticipantTest {
     public void should_return_the_price_for_single_accommodation() {
         Participant participant = new Participant(Accommodation.SINGLE);
 
-        Price price = participant.duePrice();
+        Price price = participant.duePrice(0);
 
         assertThat(price).isEqualTo(Price.of(610));
     }
@@ -21,7 +21,7 @@ public class ParticipantTest {
     public void should_return_the_price_for_double_accommodation() {
         Participant participant = new Participant(Accommodation.DOUBLE);
 
-        Price price = participant.duePrice();
+        Price price = participant.duePrice(0);
 
         assertThat(price).isEqualTo(Price.of(510));
     }
@@ -30,7 +30,7 @@ public class ParticipantTest {
     public void should_return_the_price_for_triple_accommodation() {
         Participant participant = new Participant(Accommodation.TRIPLE);
 
-        Price price = participant.duePrice();
+        Price price = participant.duePrice(0);
 
         assertThat(price).isEqualTo(Price.of(410));
     }
@@ -39,7 +39,7 @@ public class ParticipantTest {
     public void should_return_the_price_for_no_accommodation() {
         Participant participant = new Participant(Accommodation.NONE);
 
-        Price price = participant.duePrice();
+        Price price = participant.duePrice(0);
 
         assertThat(price).isEqualTo(Price.of(240));
     }
