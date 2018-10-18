@@ -1,6 +1,6 @@
-package fr.lacombe.socrates.resources;
+package fr.lacombe.socrates.coldmeal.resources;
 
-import fr.lacombe.socrates.KitchenCloseTimeProvider;
+import fr.lacombe.socrates.coldmeal.KitchenCloseTimeProvider;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package fr.lacombe.socrates;
+package fr.lacombe.socrates.coldmeal;
 
 import java.time.LocalDateTime;
 import java.util.List;

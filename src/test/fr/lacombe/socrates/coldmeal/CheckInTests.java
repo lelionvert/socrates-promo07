@@ -1,6 +1,6 @@
-package fr.lacombe.socrates;
+package fr.lacombe.socrates.coldmeal;
 
-import fr.lacombe.socrates.resources.TestKitchenCloseTimeProvider;
+import fr.lacombe.socrates.coldmeal.resources.TestKitchenCloseTimeProvider;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
