@@ -14,8 +14,12 @@ class Price {
         return new Price(value);
     }
 
-    Price deduce(int value) {
-        return Price.of(this.value - value);
+    Price deduce(Price price) {
+        return Price.of(this.value - price.value);
+    }
+
+    Price multiply(int quantity) {
+        return Price.of(value* quantity);
     }
 
     @Override

@@ -28,7 +28,7 @@ public class ParticipantTest {
 
         Price price = participant.duePrice(1);
 
-        assertThat(price).isEqualTo(Price.of(610 - 40));
+        assertThat(price).isEqualTo(Price.of(570));
     }
 
     @Test
@@ -37,6 +37,6 @@ public class ParticipantTest {
 
         Price price = participant.duePrice(2);
 
-        assertThat(price).isEqualTo(Price.of(610 - 2*40));
+        assertThat(price).isEqualTo(Price.of(530));
     }
 }

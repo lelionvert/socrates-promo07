@@ -9,6 +9,6 @@ class Participant {
     }
 
     Price duePrice(int numberOfMeals) {
-        return accommodation.price.deduce(numberOfMeals * 40);
+        return accommodation.deduceMissingMeals(numberOfMeals);
     }
 }
