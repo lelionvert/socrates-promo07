@@ -14,7 +14,7 @@ public class ParticipantTest {
 
     @Parameters({"SINGLE, 610", "DOUBLE, 510", "TRIPLE, 410", "NONE, 240"})
     @Test
-    public void calculate_the_price_without_meal_reduction(Accommodation accommodation, int accommodationPrice ) {
+    public void calculate_the_price_without_missed_meal_reduction(Accommodation accommodation, int accommodationPrice) {
         Participant participant = new Participant(accommodation);
 
         Price price = participant.duePrice(new MissedMeals(0));
@@ -22,21 +22,13 @@ public class ParticipantTest {
         assertThat(price).isEqualTo(Price.of(accommodationPrice));
     }
 
+    @Parameters({"1, 570", "2, 530"})
     @Test
-    public void calculate_the_price_for_single_accommodation_minus_one_meal() {
+    public void calculate_the_price_for_single_accommodation_with_missed_meal_reduction(int numberOfMeals, int expectedPrice) {
         Participant participant = new Participant(Accommodation.SINGLE);
 
-        Price price = participant.duePrice(new MissedMeals(1));
+        Price price = participant.duePrice(new MissedMeals(numberOfMeals));
 
-        assertThat(price).isEqualTo(Price.of(570));
-    }
-
-    @Test
-    public void calculate_the_price_for_single_accommodation_minus_two_meals() {
-        Participant participant = new Participant(Accommodation.SINGLE);
-
-        Price price = participant.duePrice(new MissedMeals(2));
-
-        assertThat(price).isEqualTo(Price.of(530));
+        assertThat(price).isEqualTo(Price.of(expectedPrice));
     }
 }

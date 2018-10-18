@@ -19,7 +19,7 @@ class Price {
     }
 
     Price multiply(int quantity) {
-        return Price.of(value* quantity);
+        return Price.of(value * quantity);
     }
 
     @Override
