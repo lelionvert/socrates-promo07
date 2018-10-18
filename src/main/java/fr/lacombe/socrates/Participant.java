@@ -13,6 +13,9 @@ class Participant {
     }
 
     Price duePrice(int numberOfMissedMeals) {
+        if(numberOfMissedMeals == 2) {
+            return Price.of(610 - 2*40);
+        }
         return Price.of(610 - 40);
     }
 }

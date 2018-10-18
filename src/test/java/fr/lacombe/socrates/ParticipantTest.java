@@ -52,4 +52,13 @@ public class ParticipantTest {
 
         assertThat(price).isEqualTo(Price.of(610 - 40));
     }
+
+    @Test
+    public void should_return_the_price_for_single_accommodation_minus_two_meals() {
+        Participant participant = new Participant(Accommodation.SINGLE);
+
+        Price price = participant.duePrice(2);
+
+        assertThat(price).isEqualTo(Price.of(610 - 2*40));
+    }
 }
