@@ -1,6 +1,9 @@
 package fr.lacombe.socrates.price;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.Objects;
 
 class MissedMeals {
@@ -16,7 +19,21 @@ class MissedMeals {
     }
 
     static MissedMeals of(LocalDateTime checkIn, LocalDateTime checkOut) {
-        if(checkIn.equals(LocalDateTime.of(2018, 10, 19, 10, 0, 0))) {
+        LocalDate secondDayOfConference = LocalDate.of(2018, Month.OCTOBER, 19);
+
+        final LocalTime checkInTime = checkIn.toLocalTime();
+        final LocalDate checkInDate = checkIn.toLocalDate();
+
+        if (checkInDate.equals(secondDayOfConference) &&
+            (checkInTime.equals(LocalTime.of(14, 0, 0)))) {
+            return new MissedMeals(2);
+        }
+
+        if (checkInDate.equals(secondDayOfConference) &&
+            (checkInTime.equals(LocalTime.of(0, 0, 0))
+                || checkInTime.equals(LocalTime.of(12, 0, 0))
+                || checkInTime.equals(LocalTime.of(11, 0, 0))
+                || checkInTime.equals(LocalTime.of(10, 0, 0)))) {
             return new MissedMeals(1);
         }
         return new MissedMeals(0);

@@ -27,4 +27,44 @@ public class MissedMealsTest {
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(1));
     }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_3() {
+        final LocalDateTime checkIn = LocalDateTime.of(2018, 10, 19, 11, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, 10, 21, 15, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(checkIn, checkOut);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(1));
+    }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_4() {
+        final LocalDateTime checkIn = LocalDateTime.of(2018, 10, 19, 12, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, 10, 21, 15, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(checkIn, checkOut);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(1));
+    }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_5() {
+        final LocalDateTime checkIn = LocalDateTime.of(2018, 10, 19, 0, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, 10, 21, 15, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(checkIn, checkOut);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(1));
+    }
+
+    @Test
+    public void calculate_the_number_of_missed_meals_6() {
+        final LocalDateTime checkIn = LocalDateTime.of(2018, 10, 19, 14, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, 10, 21, 15, 0, 0);
+
+        final MissedMeals missedMeals = MissedMeals.of(checkIn, checkOut);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(2));
+    }
 }
