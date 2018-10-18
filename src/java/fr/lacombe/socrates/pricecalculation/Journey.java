@@ -38,7 +38,7 @@ public class Journey {
 
     public int getNumberOfMissingMeals() {
         if (checkIn.getDayOfMonth() == 19
-            || checkOut.getDayOfMonth() == 20){
+            || checkOut.getDayOfMonth() == 20) {
             return 1;
         }
         return 0;
