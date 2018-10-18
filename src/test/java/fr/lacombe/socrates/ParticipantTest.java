@@ -2,9 +2,7 @@ package fr.lacombe.socrates;
 
 import org.junit.Test;
 
-import static fr.lacombe.socrates.Participant.DOUBLE_ACCOMMODATION;
-import static fr.lacombe.socrates.Participant.SINGLE_ACCOMMODATION;
-import static fr.lacombe.socrates.Participant.TRIPLE_ACCOMMODATION;
+import static fr.lacombe.socrates.Participant.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ParticipantTest {
@@ -36,5 +34,14 @@ public class ParticipantTest {
         Price price = participant.duePrice();
 
         assertThat(price).isEqualTo(Price.of(410));
+    }
+
+    @Test
+    public void should_return_the_price_for_no_accommodation() {
+        Participant participant = new Participant(NO_ACCOMMODATION);
+
+        Price price = participant.duePrice();
+
+        assertThat(price).isEqualTo(Price.of(240));
     }
 }
