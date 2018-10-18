@@ -37,10 +37,13 @@ public class Journey {
     }
 
     public int getNumberOfMissingMeals() {
-        if (checkIn.getDayOfMonth() == 19
-            || checkOut.getDayOfMonth() == 20) {
-            return 1;
+        int numberOfMissingMeals = 0;
+        if (checkIn.getDayOfMonth() == 19) {
+            numberOfMissingMeals++;
         }
-        return 0;
+        if (checkOut.getDayOfMonth() == 20) {
+            numberOfMissingMeals++;
+        }
+        return numberOfMissingMeals;
     }
 }

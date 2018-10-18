@@ -41,7 +41,7 @@ public class PriceCalculationTest {
     }
 
     @Test
-    public void should_return_accomodation_price_minus_40_without_one_meal() {
+    public void should_return_accomodation_price_minus_40_without_first_meal() {
         LocalDateTime checkInOneDayAfterConfBeginning = LocalDateTime.of(2018, Month.OCTOBER, 19, 12, 0);
         LocalDateTime checkOutAtLastDayOfConf = LocalDateTime.of(2018, Month.OCTOBER, 21, 14, 0);
         Journey journeyMinusOneDay = new JourneyBuilder()
@@ -56,7 +56,7 @@ public class PriceCalculationTest {
     }
 
     @Test
-    public void should_return_accomodation_price_minus_40_without_one_meal2() {
+    public void should_return_accomodation_price_minus_40_without_last_meal() {
         LocalDateTime checkInAtFirstDayOfConf = LocalDateTime.of(2018, Month.OCTOBER, 18, 18, 0);
         LocalDateTime checkOutOneDayBeforeConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 20, 18, 0);
         Journey journeyMinusOneDay = new JourneyBuilder()
@@ -68,5 +68,20 @@ public class PriceCalculationTest {
         int totalPrice = participant.computeParticipationPrice();
 
         assertThat(totalPrice).isEqualTo(610 - 40);
+    }
+
+    @Test
+    public void should_return_accomodation_price_minus_80_without_first_and_last_meals() {
+        LocalDateTime checkInOneDayAfterConfBeginning = LocalDateTime.of(2018, Month.OCTOBER, 19, 12, 0);
+        LocalDateTime checkOutOneDayBeforeConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 20, 18, 0);
+        Journey journeyMinusOneDay = new JourneyBuilder()
+                .from(checkInOneDayAfterConfBeginning)
+                .to(checkOutOneDayBeforeConfEnding)
+                .build();
+        Participant participant = Participant.of(journeyMinusOneDay, HostelBill.SINGLE);
+
+        int totalPrice = participant.computeParticipationPrice();
+
+        assertThat(totalPrice).isEqualTo(610 - (2 * 40));
     }
 }
