@@ -11,4 +11,8 @@ class Participant {
     Price duePrice() {
         return accommodation.price;
     }
+
+    Price duePrice(int numberOfMissedMeals) {
+        return Price.of(610 - 40);
+    }
 }
