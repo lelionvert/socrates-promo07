@@ -25,17 +25,20 @@ public class Journey {
     }
 
     private final LocalDateTime checkIn;
+    private final LocalDateTime checkOut;
 
-    private Journey(LocalDateTime checkIn) {
+    private Journey(LocalDateTime checkIn, LocalDateTime checkOut) {
         this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
     public static Journey of(LocalDateTime checkIn, LocalDateTime checkOut) {
-        return new Journey(checkIn);
+        return new Journey(checkIn, checkOut);
     }
 
     public int getNumberOfMissingMeals() {
-        if (checkIn.getDayOfMonth() == 19){
+        if (checkIn.getDayOfMonth() == 19
+            || checkOut.getDayOfMonth() == 20){
             return 1;
         }
         return 0;

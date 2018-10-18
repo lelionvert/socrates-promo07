@@ -18,7 +18,7 @@ public class PriceCalculationTest {
                 .from(checkInAtFirstDayOfConf)
                 .to(checkOutAtLastDayOfConf)
                 .build();
-        Participant participant = Participant.of(completeJourney, RoomChoice.SINGLE);
+        Participant participant = Participant.of(completeJourney, HostelBill.SINGLE);
 
         int totalPrice = participant.computeParticipationPrice();
 
@@ -33,7 +33,22 @@ public class PriceCalculationTest {
                 .from(checkInOneDayAfterConfBeginning)
                 .to(checkOutAtLastDayOfConf)
                 .build();
-        Participant participant = Participant.of(journey, RoomChoice.SINGLE);
+        Participant participant = Participant.of(journey, HostelBill.SINGLE);
+
+        int totalPrice = participant.computeParticipationPrice();
+
+        assertThat(totalPrice).isEqualTo(610 - 40);
+    }
+
+    @Test
+    public void should_return_accomodation_price_minus_40_without_one_meal2() {
+        LocalDateTime checkInAtFirstDayOfConf = LocalDateTime.of(2018, Month.OCTOBER, 18, 18, 0);
+        LocalDateTime checkOutOneDayBeforeConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 20, 18, 0);
+        Journey journey = new JourneyBuilder()
+                .from(checkInAtFirstDayOfConf)
+                .to(checkOutOneDayBeforeConfEnding)
+                .build();
+        Participant participant = Participant.of(journey, HostelBill.SINGLE);
 
         int totalPrice = participant.computeParticipationPrice();
 

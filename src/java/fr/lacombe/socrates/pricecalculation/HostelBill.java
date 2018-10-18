@@ -1,6 +1,6 @@
 package fr.lacombe.socrates.pricecalculation;
 
-public enum RoomChoice {
+public enum HostelBill {
     SINGLE(610),
     DOUBLE(510),
     TRIPLE(410),
@@ -8,7 +8,7 @@ public enum RoomChoice {
 
     private final int basePrice;
 
-    RoomChoice(int basePrice) {
+    HostelBill(int basePrice) {
         this.basePrice = basePrice;
     }
 
