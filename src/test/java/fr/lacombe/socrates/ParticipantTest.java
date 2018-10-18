@@ -1,47 +1,25 @@
 package fr.lacombe.socrates;
 
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
+@RunWith(JUnitParamsRunner.class)
 public class ParticipantTest {
 
 
-
+    @Parameters({"SINGLE, 610", "DOUBLE, 510", "TRIPLE, 410", "NONE, 240"})
     @Test
-    public void should_return_the_price_for_single_accommodation() {
-        Participant participant = new Participant(Accommodation.SINGLE);
+    public void calculate_the_price_without_meal_reduction(Accommodation accommodation, int accommodationPrice ) {
+        Participant participant = new Participant(accommodation);
 
         Price price = participant.duePrice(0);
 
-        assertThat(price).isEqualTo(Price.of(610));
-    }
-
-    @Test
-    public void should_return_the_price_for_double_accommodation() {
-        Participant participant = new Participant(Accommodation.DOUBLE);
-
-        Price price = participant.duePrice(0);
-
-        assertThat(price).isEqualTo(Price.of(510));
-    }
-
-    @Test
-    public void should_return_the_price_for_triple_accommodation() {
-        Participant participant = new Participant(Accommodation.TRIPLE);
-
-        Price price = participant.duePrice(0);
-
-        assertThat(price).isEqualTo(Price.of(410));
-    }
-
-    @Test
-    public void should_return_the_price_for_no_accommodation() {
-        Participant participant = new Participant(Accommodation.NONE);
-
-        Price price = participant.duePrice(0);
-
-        assertThat(price).isEqualTo(Price.of(240));
+        assertThat(price).isEqualTo(Price.of(accommodationPrice));
     }
 
     @Test
