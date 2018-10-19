@@ -43,6 +43,7 @@ class MissedMeals {
             && morning.contains(checkInTime)) {
             return new MissedMeals(3);
         }
+
         if (checkInDate.equals(secondDayOfConference)
             && afternoon.contains(checkInTime)) {
             return new MissedMeals(2);
