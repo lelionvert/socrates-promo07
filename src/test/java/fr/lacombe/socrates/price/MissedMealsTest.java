@@ -20,11 +20,35 @@ public class MissedMealsTest {
     public void should_calculate_the_number_of_missed_meals_with_varying_check_in_in_given_period(int dayOfMonth, int hour, int numberOfMissedMeals) {
         final LocalDate firstDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18);
         final LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, dayOfMonth, hour, 0, 0);
-        final LocalDateTime checkOut = LocalDateTime.of(2018, 10, 21, 15, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0, 0);
         final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
 
         final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, checkIn, checkOut, endOfLunchService);
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(numberOfMissedMeals));
+    }
+
+    @Test
+    public void should_calculate_the_number_of_missed_meals_with_varying_check_out_in_given_period() {
+        final LocalDate firstDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18);
+        final LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0, 0);
+        final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
+
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, checkIn, checkOut, endOfLunchService);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(0));
+    }
+
+    @Test
+    public void should_calculate_the_number_of_missed_meals_with_varying_check_out_in_given_period_2() {
+        final LocalDate firstDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18);
+        final LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 10, 0, 0);
+        final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
+
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, checkIn, checkOut, endOfLunchService);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(1));
     }
 }
