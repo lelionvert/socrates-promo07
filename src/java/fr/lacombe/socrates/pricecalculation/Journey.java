@@ -37,16 +37,17 @@ public class Journey {
     }
 
     public int getNumberOfMissingMeals(ConferenceDatesProvider conferenceDatesProvider) {
-        int numberOfMissingMeals = 0;
         int confBeginningDay = conferenceDatesProvider.getBeginning().getDayOfMonth();
         int confEndingDay = conferenceDatesProvider.getEnding().getDayOfMonth();
 
-        if (checkIn.getDayOfMonth() == confBeginningDay + 1) {
-            numberOfMissingMeals++;
-        }
-        if (checkOut.getDayOfMonth() == confEndingDay - 1) {
-            numberOfMissingMeals++;
-        }
-        return numberOfMissingMeals;
+        return getBeginningMissingMeals(confBeginningDay) + getEndingMissingMeals(confEndingDay);
+    }
+
+    private int getBeginningMissingMeals(int confBeginningDay) {
+        return checkIn.getDayOfMonth() - confBeginningDay;
+    }
+
+    private int getEndingMissingMeals(int confEndingDay) {
+        return confEndingDay - checkOut.getDayOfMonth();
     }
 }
