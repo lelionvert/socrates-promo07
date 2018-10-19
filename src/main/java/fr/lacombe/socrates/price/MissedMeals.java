@@ -25,7 +25,7 @@ class MissedMeals {
         final int NUMBER_OF_MEAL_ON_FIRST_DAY = 1;
         final int NUMBER_OF_MEALS_PER_DAY = 2;
 
-        final int daysSinceConferenceStart = (int) DAYS.between(firstDayOfConference, checkIn.toLocalDate()) - NUMBER_OF_MEAL_ON_FIRST_DAY;
+        final int daysSinceConferenceStart = (int) DAYS.between(firstDayOfConference.plusDays(1), checkIn.toLocalDate());
 
         number += NUMBER_OF_MEALS_PER_DAY * daysSinceConferenceStart + NUMBER_OF_MEAL_ON_FIRST_DAY;
         if (checkIn.toLocalTime().isAfter(endOfLunchService)) {
