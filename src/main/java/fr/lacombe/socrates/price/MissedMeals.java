@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.util.Objects;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 class MissedMeals {
 
     private static final Price MEAL_PRICE = Price.of(40);
@@ -28,21 +30,15 @@ class MissedMeals {
         );
 
         int number = 0;
+        final int NUMBER_OF_MEAL_ON_FIRST_DAY = 1;
+        final int NUMBER_OF_MEALS_PER_DAY = 2;
 
-        LocalDate thirdDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18 + 2);
-        if (checkInDate.equals(thirdDayOfConference)) {
-            number = number + 2 + 1;
-            if (afternoon.contains(checkInTime)) {
-                number = number + 1;
-            }
-        }
+        final LocalDate firstDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18);
+        final int daysSinceConferenceStart = (int) DAYS.between(firstDayOfConference, checkInDate) - NUMBER_OF_MEAL_ON_FIRST_DAY;
 
-        LocalDate secondDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18 + 1);
-        if (checkInDate.equals(secondDayOfConference)) {
+        number += NUMBER_OF_MEALS_PER_DAY * daysSinceConferenceStart + NUMBER_OF_MEAL_ON_FIRST_DAY;
+        if (afternoon.contains(checkInTime)) {
             number = number + 1;
-            if (afternoon.contains(checkInTime)) {
-                number = number + 1;
-            }
         }
 
         return new MissedMeals(number);
