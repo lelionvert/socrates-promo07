@@ -4,7 +4,7 @@ public enum Accommodation {
     SINGLE(610),
     DOUBLE(510),
     TRIPLE(410),
-    NO_ACCOMODATION(240);
+    NO_ACCOMMODATION(240);
 
     private final int basePrice;
 
