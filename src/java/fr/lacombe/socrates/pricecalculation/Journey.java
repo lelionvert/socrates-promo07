@@ -1,7 +1,6 @@
 package fr.lacombe.socrates.pricecalculation;
 
 import java.time.LocalDateTime;
-import java.time.Period;
 
 public class Journey {
 
