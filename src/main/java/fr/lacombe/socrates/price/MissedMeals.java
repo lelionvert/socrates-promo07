@@ -1,11 +1,7 @@
 package fr.lacombe.socrates.price;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
-
-import static java.time.temporal.ChronoUnit.DAYS;
 
 class MissedMeals {
 
@@ -19,32 +15,33 @@ class MissedMeals {
         this.numberOfMeals = numberOfMeals;
     }
 
-    static MissedMeals of(
-        LocalDate firstDayOfConference,
-        LocalDate lastDayOfConference,
-        LocalDateTime checkIn,
-        LocalDateTime checkOut,
-        LocalTime endOfLunchService
-    ) {
+    static MissedMeals of(Period conferencePeriod, Period participantSojourn, LocalTime endOfLunchService) {
+
         final int NUMBER_OF_MEAL_ON_FIRST_DAY = 1;
         final int NUMBER_OF_MEALS_PER_DAY = 2;
 
-        final int daysSinceConferenceStart = (int) DAYS.between(firstDayOfConference.plusDays(1), checkIn.toLocalDate());
-        final int daysUntilConferenceEnd = (int) DAYS.between(checkOut.toLocalDate(), lastDayOfConference);
+        final int numberOfMissedDays = conferencePeriod.daysDifferenceWith(participantSojourn);
+        MissedMeals missedMeals = new MissedMeals(numberOfMissedDays)
+            .multiply(NUMBER_OF_MEALS_PER_DAY)
+            .add(NUMBER_OF_MEAL_ON_FIRST_DAY);
 
-        int number = 0;
-
-        number += NUMBER_OF_MEALS_PER_DAY * daysUntilConferenceEnd;
-        if (checkOut.toLocalTime().isBefore(endOfLunchService)) {
-            number = number + 1;
+        if (participantSojourn.endIsBefore(endOfLunchService)) {
+            missedMeals = missedMeals.add(NUMBER_OF_MEAL_ON_FIRST_DAY);
         }
 
-        number += NUMBER_OF_MEALS_PER_DAY * daysSinceConferenceStart + NUMBER_OF_MEAL_ON_FIRST_DAY;
-        if (checkIn.toLocalTime().isAfter(endOfLunchService)) {
-            number = number + 1;
+        if (participantSojourn.startIsAfter(endOfLunchService)) {
+            missedMeals = missedMeals.add(NUMBER_OF_MEAL_ON_FIRST_DAY);
         }
 
-        return new MissedMeals(number);
+        return missedMeals;
+    }
+
+    private MissedMeals add(int quantity) {
+        return new MissedMeals(numberOfMeals + quantity);
+    }
+
+    private MissedMeals multiply(int quantity) {
+        return new MissedMeals(numberOfMeals * quantity);
     }
 
     Price calculatePrice() {
