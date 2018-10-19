@@ -23,7 +23,7 @@ public class MissedMealsTest {
         final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0, 0);
         final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
 
-        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, checkIn, checkOut, endOfLunchService);
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, LocalDate.of(2018, Month.OCTOBER, 21), checkIn, checkOut, endOfLunchService);
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(numberOfMissedMeals));
     }
@@ -35,7 +35,7 @@ public class MissedMealsTest {
         final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0, 0);
         final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
 
-        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, checkIn, checkOut, endOfLunchService);
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, LocalDate.of(2018, Month.OCTOBER, 21), checkIn, checkOut, endOfLunchService);
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(0));
     }
@@ -47,8 +47,33 @@ public class MissedMealsTest {
         final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 21, 10, 0, 0);
         final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
 
-        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, checkIn, checkOut, endOfLunchService);
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, LocalDate.of(2018, Month.OCTOBER, 21), checkIn, checkOut, endOfLunchService);
 
         assertThat(missedMeals).isEqualTo(new MissedMeals(1));
+    }
+
+    @Test
+    public void should_calculate_the_number_of_missed_meals_with_varying_check_out_in_given_period_3() {
+        final LocalDate firstDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18);
+        final LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 20, 15, 0, 0);
+        final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
+
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, LocalDate.of(2018, Month.OCTOBER, 21), checkIn, checkOut, endOfLunchService);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(2));
+    }
+
+    @Test
+    public void should_calculate_the_number_of_missed_meals_with_varying_check_out_in_given_period_4() {
+        final LocalDate firstDayOfConference = LocalDate.of(2018, Month.OCTOBER, 18);
+        final LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0, 0);
+        final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, 20, 10, 0, 0);
+        final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
+
+        final MissedMeals missedMeals = MissedMeals.of(firstDayOfConference, LocalDate.of(2018, Month.OCTOBER, 21), checkIn, checkOut, endOfLunchService);
+
+        assertThat(missedMeals).isEqualTo(new MissedMeals(3
+        ));
     }
 }

@@ -3,7 +3,6 @@ package fr.lacombe.socrates.price;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.Month;
 import java.util.Objects;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -20,20 +19,28 @@ class MissedMeals {
         this.numberOfMeals = numberOfMeals;
     }
 
-    static MissedMeals of(LocalDate firstDayOfConference, LocalDateTime checkIn, LocalDateTime checkOut, LocalTime endOfLunchService) {
+    static MissedMeals of(
+        LocalDate firstDayOfConference,
+        LocalDate lastDayOfConference,
+        LocalDateTime checkIn,
+        LocalDateTime checkOut,
+        LocalTime endOfLunchService
+    ) {
         final int NUMBER_OF_MEAL_ON_FIRST_DAY = 1;
         final int NUMBER_OF_MEALS_PER_DAY = 2;
 
         final int daysSinceConferenceStart = (int) DAYS.between(firstDayOfConference.plusDays(1), checkIn.toLocalDate());
+        final int daysUntilConferenceEnd = (int) DAYS.between(checkOut.toLocalDate(), lastDayOfConference);
 
         int number = 0;
 
-        number += NUMBER_OF_MEALS_PER_DAY * daysSinceConferenceStart + NUMBER_OF_MEAL_ON_FIRST_DAY;
-        if (checkIn.toLocalTime().isAfter(endOfLunchService)) {
+        number += NUMBER_OF_MEALS_PER_DAY * daysUntilConferenceEnd;
+        if (checkOut.toLocalTime().isBefore(endOfLunchService)) {
             number = number + 1;
         }
 
-        if(checkOut.equals(LocalDateTime.of(2018, Month.OCTOBER, 21, 10, 0, 0))) {
+        number += NUMBER_OF_MEALS_PER_DAY * daysSinceConferenceStart + NUMBER_OF_MEAL_ON_FIRST_DAY;
+        if (checkIn.toLocalTime().isAfter(endOfLunchService)) {
             number = number + 1;
         }
 
