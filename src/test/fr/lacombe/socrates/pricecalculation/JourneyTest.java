@@ -95,4 +95,32 @@ public class JourneyTest {
         int missedMealFridayLunch = 1;
         Assertions.assertThat(numberOfMissingMeals).isEqualTo(missedMealThursday + missedMealFridayLunch);
     }
+
+    @Test
+    public void should_have_2_missing_meals_when_checkIn_at_conf_beginning_and_checkOut_one_day_before_dinner_of_conf_ending() {
+        LocalDateTime checkInAtConfBeginning = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0);
+        LocalDateTime confEnding = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
+        LocalDateTime checkOutOneDayBeforeDinnerOfConfEnding = confEnding.minusDays(1).withHour(18).minusHours(1);
+
+        Journey completeJourney = getJourney(checkInAtConfBeginning, checkOutOneDayBeforeDinnerOfConfEnding);
+
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
+
+        int missedMealSunday = 1;
+        int missedMealSaturdayDinner = 1;
+        Assertions.assertThat(numberOfMissingMeals).isEqualTo(missedMealSunday + missedMealSaturdayDinner);
+    }
+
+    @Test
+    public void should_have_2_missing_meals_even_if_really_miss_more_than_2_meals() {
+        LocalDateTime checkInAtConfBeginning = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0);
+        LocalDateTime confEnding = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
+        LocalDateTime checkOutOneDayBeforeLunchOfConfEnding = confEnding.minusDays(2);
+
+        Journey completeJourney = getJourney(checkInAtConfBeginning, checkOutOneDayBeforeLunchOfConfEnding);
+
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
+
+        Assertions.assertThat(numberOfMissingMeals).isEqualTo(2);
+    }
 }

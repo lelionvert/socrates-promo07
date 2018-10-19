@@ -1,6 +1,7 @@
 package fr.lacombe.socrates.pricecalculation;
 
 import java.time.LocalDateTime;
+import java.time.Period;
 
 public class Journey {
 
@@ -40,7 +41,16 @@ public class Journey {
         int confBeginningDay = conferenceDatesProvider.getBeginning().getDayOfMonth();
         int confEndingDay = conferenceDatesProvider.getEnding().getDayOfMonth();
 
-        return getBeginningMissingMeals(confBeginningDay) + getEndingMissingMeals(confEndingDay);
+        int totalMissingMeals = getBeginningMissingMeals(confBeginningDay) + getEndingMissingMeals(confEndingDay);
+        return max(totalMissingMeals);
+    }
+
+    private int max(int totalMissingMeals) {
+        if (totalMissingMeals > 2) {
+            return 2;
+        }
+
+        return totalMissingMeals;
     }
 
     private int getBeginningMissingMeals(int confBeginningDay) {
@@ -52,6 +62,10 @@ public class Journey {
     }
 
     private int getEndingMissingMeals(int confEndingDay) {
-        return confEndingDay - checkOut.getDayOfMonth();
+        int difference = confEndingDay - checkOut.getDayOfMonth();
+        if (difference > 0 && checkOut.getHour() < 18) {
+            difference += 1;
+        }
+        return difference;
     }
 }
