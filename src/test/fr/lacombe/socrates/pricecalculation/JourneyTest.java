@@ -2,6 +2,7 @@ package fr.lacombe.socrates.pricecalculation;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -49,7 +50,8 @@ public class JourneyTest {
 
     @Test
     public void should_have_1_missing_meal_when_checkin_one_day_after_conf_beginning_and_checkout_at_conf_ending() {
-        LocalDateTime checkInOneDayAfterConfBeginning = LocalDateTime.of(2018, Month.OCTOBER, 19, 12, 0);
+        LocalDateTime confBeginning = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0);
+        LocalDateTime checkInOneDayAfterConfBeginning = confBeginning.plusDays(1).withHour(12);
         LocalDateTime checkOutAtConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
         Journey completeJourney = getJourney(checkInOneDayAfterConfBeginning, checkOutAtConfEnding);
 
@@ -78,5 +80,19 @@ public class JourneyTest {
         int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
 
         Assertions.assertThat(numberOfMissingMeals).isEqualTo(2);
+    }
+
+    @Test
+    public void should_have_2_missing_meals_when_checkIn_one_day_after_lunch_of_conf_beginning_and_checkOut_at_conf_ending() {
+        LocalDateTime confBeginning = LocalDateTime.of(2018, Month.OCTOBER, 18, 15, 0);
+        LocalDateTime checkInOneDayAfterLunchOfConfBeginning = confBeginning.plusDays(1).withHour(12).plusHours(2);
+        LocalDateTime checkOutAtConfEnding = LocalDateTime.of(2018, Month.OCTOBER, 21, 15, 0);
+        Journey completeJourney = getJourney(checkInOneDayAfterLunchOfConfBeginning, checkOutAtConfEnding);
+
+        int numberOfMissingMeals = completeJourney.getNumberOfMissingMeals(conferenceDatesProviderTest);
+
+        int missedMealThursday = 1;
+        int missedMealFridayLunch = 1;
+        Assertions.assertThat(numberOfMissingMeals).isEqualTo(missedMealThursday + missedMealFridayLunch);
     }
 }

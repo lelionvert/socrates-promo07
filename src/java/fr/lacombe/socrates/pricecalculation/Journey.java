@@ -44,7 +44,11 @@ public class Journey {
     }
 
     private int getBeginningMissingMeals(int confBeginningDay) {
-        return checkIn.getDayOfMonth() - confBeginningDay;
+        int difference = checkIn.getDayOfMonth() - confBeginningDay;
+        if (difference > 0 && checkIn.getHour() >= 14) {
+            difference += 1;
+        }
+        return difference;
     }
 
     private int getEndingMissingMeals(int confEndingDay) {
