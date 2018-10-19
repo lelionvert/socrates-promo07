@@ -16,28 +16,22 @@ class MissedMeals {
     }
 
     static MissedMeals of(Period conferencePeriod, Period participantSojourn, LocalTime endOfLunchService) {
-
-        final int NUMBER_OF_MEAL_ON_FIRST_DAY = 1;
         final int NUMBER_OF_MEALS_PER_DAY = 2;
-
         final int numberOfMissedDays = conferencePeriod.daysDifferenceWith(participantSojourn);
-        MissedMeals missedMeals = new MissedMeals(numberOfMissedDays)
+
+        return new MissedMeals(numberOfMissedDays)
             .multiply(NUMBER_OF_MEALS_PER_DAY)
-            .add(NUMBER_OF_MEAL_ON_FIRST_DAY);
-
-        if (participantSojourn.endIsBefore(endOfLunchService)) {
-            missedMeals = missedMeals.add(NUMBER_OF_MEAL_ON_FIRST_DAY);
-        }
-
-        if (participantSojourn.startIsAfter(endOfLunchService)) {
-            missedMeals = missedMeals.add(NUMBER_OF_MEAL_ON_FIRST_DAY);
-        }
-
-        return missedMeals;
+            .increment()
+            .incrementIf(participantSojourn.startIsAfter(endOfLunchService))
+            .incrementIf(participantSojourn.endIsBefore(endOfLunchService));
     }
 
-    private MissedMeals add(int quantity) {
-        return new MissedMeals(numberOfMeals + quantity);
+    private MissedMeals increment() {
+        return new MissedMeals(numberOfMeals + 1);
+    }
+
+    private MissedMeals incrementIf(final boolean shouldIncrement) {
+        return shouldIncrement ? this.increment() : this;
     }
 
     private MissedMeals multiply(int quantity) {
