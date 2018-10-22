@@ -1,6 +1,7 @@
 package fr.lacombe.socrates.covers;
 
 class Participant {
+
     private final Period sojourn;
     private final Diet diet;
 
@@ -13,11 +14,11 @@ class Participant {
         return new Participant(sojourn, diet);
     }
 
-    Diet getDiet() {
-        return diet;
+    boolean isPresent(final Period period) {
+        return sojourn.intersects(period);
     }
 
-    public Period getSojourn() {
-        return sojourn;
+    boolean hasDiet(final Diet diet) {
+        return this.diet == diet;
     }
 }
