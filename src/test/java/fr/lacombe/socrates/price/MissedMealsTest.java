@@ -54,9 +54,13 @@ public class MissedMealsTest {
 
     @Test
     @Parameters({"19, 10, 20, 18, 3"})
-    public void should_calculate_the_number_of_missed_meals_with_varying_check_out_and_check_in(int checkInDay, int checkInHour, int checkOutDay, int checkOutHour, int numberOfMissedMeals) {
-        final LocalDateTime checkIn = LocalDateTime.of(2018, Month.OCTOBER, checkInDay, checkInHour, 0, 0);
-        final LocalDateTime checkOut = LocalDateTime.of(2018, Month.OCTOBER, checkOutDay, checkOutHour, 0, 0);
+    public void should_calculate_the_number_of_missed_meals_with_varying_check_in_and_check_out(int checkInDay, int checkInHour, int checkOutDay, int checkOutHour, int numberOfMissedMeals) {
+        final LocalDateTime checkIn = LocalDateTime.of(
+            2018, Month.OCTOBER, checkInDay, checkInHour, 0, 0
+        );
+        final LocalDateTime checkOut = LocalDateTime.of(
+            2018, Month.OCTOBER, checkOutDay, checkOutHour, 0, 0
+        );
         final LocalTime endOfLunchService = LocalTime.of(13, 59, 59);
 
         Period conferencePeriod = new Period(
