@@ -3,13 +3,19 @@ package fr.lacombe.socrates.covers;
 import java.util.List;
 
 import static fr.lacombe.socrates.covers.Diet.VEGETARIAN;
+import static java.util.stream.Collectors.toList;
 
 class Meals {
 
-    static int calculateNumberOfVegetarianCovers(final Participant participant, final List<Period> meals) {
-        if (participant.hasDiet(VEGETARIAN))
-            return (int) meals.stream().filter(participant::isPresent).count();
+    static int calculateNumberOfVegetarianCovers(final List<Participant> participants, final List<Period> meals) {
+        final List<Participant> vegetarians = participants
+                .stream()
+                .filter(participant -> participant.hasDiet(VEGETARIAN))
+                .collect(toList());
 
-        return 0;
+        return meals
+                .stream()
+                .mapToInt(meal -> (int) vegetarians.stream().filter(participant -> participant.isPresent(meal)).count())
+                .sum();
     }
 }

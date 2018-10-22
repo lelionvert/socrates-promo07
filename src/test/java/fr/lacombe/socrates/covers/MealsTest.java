@@ -3,7 +3,6 @@ package fr.lacombe.socrates.covers;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
 
 import static fr.lacombe.socrates.covers.Diet.VEGAN;
@@ -25,9 +24,9 @@ public class MealsTest {
                 LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
                 LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
         );
-        final Participant participant = Participant.of(participantSojourn, VEGETARIAN);
+        final List<Participant> participants = singletonList(Participant.of(participantSojourn, VEGETARIAN));
 
-        final int result = Meals.calculateNumberOfVegetarianCovers(participant, meals);
+        final int result = Meals.calculateNumberOfVegetarianCovers(participants, meals);
 
         assertThat(result).isEqualTo(1);
     }
@@ -42,9 +41,9 @@ public class MealsTest {
                 LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
                 LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
         );
-        final Participant participant = Participant.of(participantSojourn, VEGAN);
+        final List<Participant> participants = singletonList(Participant.of(participantSojourn, VEGAN));
 
-        final int result = Meals.calculateNumberOfVegetarianCovers(participant, meals);
+        final int result = Meals.calculateNumberOfVegetarianCovers(participants, meals);
 
         assertThat(result).isEqualTo(0);
     }
@@ -59,9 +58,9 @@ public class MealsTest {
                 LocalDateTime.of(2018, OCTOBER, 18, 23, 0, 0),
                 LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
         );
-        final Participant participant = Participant.of(participantSojourn, VEGETARIAN);
+        final List<Participant> participants = singletonList(Participant.of(participantSojourn, VEGETARIAN));
 
-        final int result = Meals.calculateNumberOfVegetarianCovers(participant, meals);
+        final int result = Meals.calculateNumberOfVegetarianCovers(participants, meals);
 
         assertThat(result).isEqualTo(0);
     }
@@ -83,10 +82,56 @@ public class MealsTest {
                 LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
                 LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
         );
-        final Participant participant = Participant.of(participantSojourn, VEGETARIAN);
+        final List<Participant> participants = singletonList(Participant.of(participantSojourn, VEGETARIAN));
 
-        final int result = Meals.calculateNumberOfVegetarianCovers(participant, meals);
+        final int result = Meals.calculateNumberOfVegetarianCovers(participants, meals);
 
         assertThat(result).isEqualTo(2);
+    }
+
+    @Test
+    public void should_calculate_the_number_of_vegetarian_covers_for_multiple_participants_in_one_meal() {
+        final List<Period> meals = singletonList(Period.of(
+                LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
+                LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
+        ));
+
+        final List<Participant> participants = asList(
+                Participant.of(Period.of(
+                        LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
+                        LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
+                ), VEGETARIAN),
+                Participant.of(Period.of(
+                        LocalDateTime.of(2018, OCTOBER, 19, 10, 0, 0),
+                        LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
+                ), VEGETARIAN)
+        );
+
+        final int result = Meals.calculateNumberOfVegetarianCovers(participants, meals);
+
+        assertThat(result).isEqualTo(1);
+    }
+
+    @Test
+    public void should_calculate_the_number_of_vegetarian_covers_for_multiple_participants_in_one_meal_2() {
+        final List<Period> meals = singletonList(Period.of(
+                LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
+                LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
+        ));
+
+        final List<Participant> participants = asList(
+                Participant.of(Period.of(
+                        LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
+                        LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
+                ), VEGAN),
+                Participant.of(Period.of(
+                        LocalDateTime.of(2018, OCTOBER, 19, 10, 0, 0),
+                        LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
+                ), VEGETARIAN)
+        );
+
+        final int result = Meals.calculateNumberOfVegetarianCovers(participants, meals);
+
+        assertThat(result).isEqualTo(0);
     }
 }
