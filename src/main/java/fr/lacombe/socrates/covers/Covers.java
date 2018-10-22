@@ -1,0 +1,41 @@
+package fr.lacombe.socrates.covers;
+
+import java.util.List;
+import java.util.Objects;
+
+class Covers {
+
+    private final Meal meal;
+    private final List<Diet> diets;
+
+    private Covers(final Meal meal, final List<Diet> diets) {
+        this.meal = meal;
+        this.diets = diets;
+    }
+
+    static Covers of(final Meal meal, final List<Diet> diets) {
+        return new Covers(meal, diets);
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final Covers covers = (Covers) o;
+        return Objects.equals(meal, covers.meal) &&
+                Objects.equals(diets, covers.diets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(meal, diets);
+    }
+
+    @Override
+    public String toString() {
+        return "Covers{" +
+                "meal=" + meal +
+                ", diets=" + diets +
+                '}';
+    }
+}

@@ -18,4 +18,18 @@ class Meals {
                 .mapToInt(meal -> (int) vegetarians.stream().filter(participant -> participant.isPresent(meal)).count())
                 .sum();
     }
+
+    static List<Covers> calculateVegetarianCovers(final List<Participant> participants, final List<Meal> meals) {
+        return meals
+                .stream()
+                .map(meal -> Covers.of(
+                        meal,
+                        participants
+                                .stream()
+                                .filter(meal::hasParticipant)
+                                .map(Participant::getDiet)
+                                .collect(toList())
+                ))
+                .collect(toList());
+    }
 }

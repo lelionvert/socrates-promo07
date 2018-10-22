@@ -21,4 +21,8 @@ class Participant {
     boolean hasDiet(final Diet diet) {
         return this.diet == diet;
     }
+
+    Diet getDiet() {
+        return diet;
+    }
 }

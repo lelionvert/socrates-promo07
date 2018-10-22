@@ -134,4 +134,35 @@ public class MealsTest {
 
         assertThat(result).isEqualTo(0);
     }
+
+    @Test
+    public void should_calculate_the_number_of_vegetarian_covers_for_multiple_participants_in_one_meal_32() {
+        final List<Meal> meals = singletonList(Meal.of(Period.of(
+                LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
+                LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
+        )));
+
+        final List<Participant> participants = asList(
+                Participant.of(Period.of(
+                        LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
+                        LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
+                ), VEGAN),
+                Participant.of(Period.of(
+                        LocalDateTime.of(2018, OCTOBER, 18, 15, 0, 0),
+                        LocalDateTime.of(2018, OCTOBER, 21, 15, 0, 0)
+                ), VEGETARIAN)
+        );
+
+        final List<Covers> result = Meals.calculateVegetarianCovers(participants, meals);
+
+        assertThat(result).isEqualTo(singletonList(
+                Covers.of(
+                        Meal.of(Period.of(
+                                LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
+                                LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
+                        )),
+                        asList(VEGAN, VEGETARIAN)
+                )
+        ));
+    }
 }
