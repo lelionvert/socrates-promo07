@@ -1,19 +1,23 @@
 package fr.lacombe.socrates.covers;
 
 class Participant {
+    private final Period sojourn;
     private final Diet diet;
-    private final boolean isParticipantPresent;
 
-    Participant(final Diet diet, final boolean isParticipantPresent) {
+    private Participant(final Period sojourn, final Diet diet) {
+        this.sojourn = sojourn;
         this.diet = diet;
-        this.isParticipantPresent = isParticipantPresent;
+    }
+
+    static Participant of(final Period sojourn, final Diet diet) {
+        return new Participant(sojourn, diet);
     }
 
     Diet getDiet() {
         return diet;
     }
 
-    boolean isParticipantPresent() {
-        return isParticipantPresent;
+    public Period getSojourn() {
+        return sojourn;
     }
 }
