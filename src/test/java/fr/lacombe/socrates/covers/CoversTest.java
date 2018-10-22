@@ -38,7 +38,7 @@ public class CoversTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonMap(VEGETARIAN, 1L)
+                        Diets.of(singletonMap(VEGETARIAN, 1L))
                 )
         ));
     }
@@ -65,7 +65,7 @@ public class CoversTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        emptyMap()
+                        Diets.of(emptyMap())
                 )
         ));
     }
@@ -98,7 +98,7 @@ public class CoversTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonMap(VEGETARIAN, 1L)
+                        Diets.of(singletonMap(VEGETARIAN, 1L))
                 ),
 
                 Covers.of(
@@ -106,7 +106,7 @@ public class CoversTest {
                                 LocalDateTime.of(2018, OCTOBER, 19, 12, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 19, 14, 0, 0)
                         )),
-                        singletonMap(VEGETARIAN, 1L)
+                        Diets.of(singletonMap(VEGETARIAN, 1L))
                 )
         ));
     }
@@ -137,7 +137,7 @@ public class CoversTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonMap(VEGETARIAN, 1L)
+                        Diets.of(singletonMap(VEGETARIAN, 1L))
                 )
         ));
     }
@@ -168,7 +168,7 @@ public class CoversTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonMap(VEGAN, 1L)
+                        Diets.of(singletonMap(VEGAN, 1L))
                 )
         ));
     }
@@ -196,13 +196,14 @@ public class CoversTest {
         final Map<Diet, Long> diets = new HashMap<>();
         diets.put(VEGAN, 1L);
         diets.put(VEGETARIAN, 1L);
+        
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(
                         Meal.of(Period.of(
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        diets
+                        Diets.of(diets)
                 )
         ));
     }
