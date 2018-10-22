@@ -13,15 +13,14 @@ public class CoversApplication {
 
     public static void main(final String[] args) throws IOException {
         if (args.length != 2) {
-            System.err.println("Usage: java -jar application.jar meals.csv participants.csv");
+            System.err.println("Usage: java -jar socrates-covers.jar meals.csv participants.csv");
             System.exit(-1);
         }
 
         final List<Meal> meals = parseMeals(args[0]);
         final List<Participant> participants = parseParticipants(args[1]);
 
-        final List<Covers> covers = Covers.from(meals, participants);
-        System.out.println(covers);
+        Covers.from(meals, participants).forEach(System.out::println);
     }
 
     private static List<Meal> parseMeals(final String csvPath) throws IOException {

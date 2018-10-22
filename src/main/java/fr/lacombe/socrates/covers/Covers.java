@@ -51,9 +51,6 @@ class Covers {
 
     @Override
     public String toString() {
-        return "Covers{" +
-                "meal=" + meal +
-                ", diets=" + diets +
-                '}';
+        return meal + "\n" + diets + "\n\n";
     }
 }

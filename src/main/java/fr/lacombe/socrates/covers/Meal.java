@@ -33,8 +33,6 @@ class Meal {
 
     @Override
     public String toString() {
-        return "Meal{" +
-                "period=" + period +
-                '}';
+        return "[" + period + "]";
     }
 }

@@ -1,6 +1,7 @@
 package fr.lacombe.socrates.covers;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 class Period {
@@ -37,9 +38,7 @@ class Period {
 
     @Override
     public String toString() {
-        return "Period{" +
-                "start=" + start +
-                ", end=" + end +
-                '}';
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd/MM/yyyy");
+        return start.format(formatter) + " - " + end.format(formatter);
     }
 }
