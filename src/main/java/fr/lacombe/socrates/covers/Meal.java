@@ -1,6 +1,11 @@
 package fr.lacombe.socrates.covers;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 
 class Meal {
 
@@ -13,11 +18,14 @@ class Meal {
     static Meal of(final Period period) {
         return new Meal(period);
     }
-
-    boolean hasParticipant(final Participant participant) {
-        return participant.isPresent(period);
+    
+    Map<Diet, Long> groupDietsByParticipants(final List<Participant> participants) {
+        return participants
+                .stream()
+                .filter(participant -> participant.isPresent(period))
+                .collect(groupingBy(Participant::getDiet, counting()));
     }
-
+    
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static java.util.stream.Collectors.counting;
-import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 class Covers {
@@ -25,17 +23,10 @@ class Covers {
     static List<Covers> from(final List<Meal> meals, final List<Participant> participants) {
         return meals
                 .stream()
-                .map(meal -> of(meal, dietsByParticipants(participants, meal)))
+                .map(meal -> of(meal, meal.groupDietsByParticipants(participants)))
                 .collect(toList());
     }
-
-    private static Map<Diet, Long> dietsByParticipants(final List<Participant> participants, final Meal meal) {
-        return participants
-                .stream()
-                .filter(meal::hasParticipant)
-                .collect(groupingBy(Participant::getDiet, counting()));
-    }
-
+    
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
