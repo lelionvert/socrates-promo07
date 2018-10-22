@@ -3,7 +3,6 @@ package fr.lacombe.socrates.covers;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CoversTest {
 
     @Test
-    public void should_calculate_the_number_of_vegetarian_covers_when_a_vegetarian_participant_is_present() {
+    public void should_get_the_covers_diets_for_one_meal_with_one_participant() {
         final List<Meal> meals = singletonList(Meal.of(Period.of(
                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
@@ -45,7 +44,7 @@ public class CoversTest {
     }
 
     @Test
-    public void should_calculate_the_number_of_vegetarian_covers_no_vegetarian_participant_is_present() {
+    public void should_get_empty_covers_diets_for_one_meal_without_participant() {
         final List<Meal> meals = singletonList(Meal.of(Period.of(
                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)

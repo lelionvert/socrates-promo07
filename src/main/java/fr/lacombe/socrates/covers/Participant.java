@@ -18,10 +18,6 @@ class Participant {
         return sojourn.contains(period);
     }
 
-    boolean hasDiet(final Diet diet) {
-        return this.diet == diet;
-    }
-
     Diet getDiet() {
         return diet;
     }

@@ -25,14 +25,15 @@ class Covers {
     static List<Covers> from(final List<Meal> meals, final List<Participant> participants) {
         return meals
                 .stream()
-                .map(meal -> of(
-                        meal,
-                        participants
-                                .stream()
-                                .filter(meal::hasParticipant)
-                                .collect(groupingBy(Participant::getDiet, counting()))
-                ))
+                .map(meal -> of(meal, dietsByParticipants(participants, meal)))
                 .collect(toList());
+    }
+
+    private static Map<Diet, Long> dietsByParticipants(final List<Participant> participants, final Meal meal) {
+        return participants
+                .stream()
+                .filter(meal::hasParticipant)
+                .collect(groupingBy(Participant::getDiet, counting()));
     }
 
     @Override

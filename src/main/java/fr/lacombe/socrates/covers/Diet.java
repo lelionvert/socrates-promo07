@@ -4,5 +4,5 @@ enum Diet {
     OMNIVOROUS,
     VEGETARIAN,
     VEGAN,
-    PESCATARIAN,
+    PESCATARIAN
 }
