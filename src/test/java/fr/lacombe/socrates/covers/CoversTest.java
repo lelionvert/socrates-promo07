@@ -3,17 +3,19 @@ package fr.lacombe.socrates.covers;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static fr.lacombe.socrates.covers.Diet.VEGAN;
 import static fr.lacombe.socrates.covers.Diet.VEGETARIAN;
 import static java.time.Month.OCTOBER;
 import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MealsTest {
+public class CoversTest {
 
     @Test
     public void should_calculate_the_number_of_vegetarian_covers_when_a_vegetarian_participant_is_present() {
@@ -37,7 +39,7 @@ public class MealsTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonList(VEGETARIAN)
+                        singletonMap(VEGETARIAN, 1L)
                 )
         ));
     }
@@ -64,7 +66,7 @@ public class MealsTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        emptyList()
+                        emptyMap()
                 )
         ));
     }
@@ -97,7 +99,7 @@ public class MealsTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonList(VEGETARIAN)
+                        singletonMap(VEGETARIAN, 1L)
                 ),
 
                 Covers.of(
@@ -105,7 +107,7 @@ public class MealsTest {
                                 LocalDateTime.of(2018, OCTOBER, 19, 12, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 19, 14, 0, 0)
                         )),
-                        singletonList(VEGETARIAN)
+                        singletonMap(VEGETARIAN, 1L)
                 )
         ));
     }
@@ -136,7 +138,7 @@ public class MealsTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonList(VEGETARIAN)
+                        singletonMap(VEGETARIAN, 1L)
                 )
         ));
     }
@@ -167,7 +169,7 @@ public class MealsTest {
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        singletonList(VEGAN)
+                        singletonMap(VEGAN, 1L)
                 )
         ));
     }
@@ -192,13 +194,16 @@ public class MealsTest {
 
         final List<Covers> result = Covers.from(meals, participants);
 
+        final Map<Diet, Long> diets = new HashMap<>();
+        diets.put(VEGAN, 1L);
+        diets.put(VEGETARIAN, 1L);
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(
                         Meal.of(Period.of(
                                 LocalDateTime.of(2018, OCTOBER, 18, 19, 0, 0),
                                 LocalDateTime.of(2018, OCTOBER, 18, 21, 0, 0)
                         )),
-                        asList(VEGAN, VEGETARIAN)
+                        diets
                 )
         ));
     }

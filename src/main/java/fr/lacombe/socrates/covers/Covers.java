@@ -1,21 +1,24 @@
 package fr.lacombe.socrates.covers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.counting;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 class Covers {
 
     private final Meal meal;
-    private final List<Diet> diets;
+    private final Map<Diet, Long> diets;
 
-    private Covers(final Meal meal, final List<Diet> diets) {
+    private Covers(final Meal meal, final Map<Diet, Long> diets) {
         this.meal = meal;
         this.diets = diets;
     }
 
-    static Covers of(final Meal meal, final List<Diet> diets) {
+    static Covers of(final Meal meal, final Map<Diet, Long> diets) {
         return new Covers(meal, diets);
     }
 
@@ -27,8 +30,7 @@ class Covers {
                         participants
                                 .stream()
                                 .filter(meal::hasParticipant)
-                                .map(Participant::getDiet)
-                                .collect(toList())
+                                .collect(groupingBy(Participant::getDiet, counting()))
                 ))
                 .collect(toList());
     }
