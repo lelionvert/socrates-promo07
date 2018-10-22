@@ -14,7 +14,7 @@ public class ConferenceTest {
 
     @Before
     public void initTest() {
-        conference = Conference.of(2, 12, 18);
+        conference = Conference.of(2, 12, 14, 18);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ConferenceTest {
     }
 
     @Test
-    public void should_compute_number_of_meals_in_a_period_of_two_days_plus_one_meal(){
+    public void should_compute_number_of_meals_in_a_period_of_two_days_plus_one_meal_last_day(){
         LocalDateTime start = LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0);
         LocalDateTime end = LocalDateTime.of(2018, Month.OCTOBER, 20, 12, 0);
         PeriodWithTime period = PeriodWithTime.between(start, end);
@@ -51,7 +51,7 @@ public class ConferenceTest {
     }
 
     @Test
-    public void should_compute_number_of_meals_in_a_period_of_two_days_plus_two_meals(){
+    public void should_compute_number_of_meals_in_a_period_of_two_days_plus_two_meals_last_day(){
         LocalDateTime start = LocalDateTime.of(2018, Month.OCTOBER, 18, 0, 0);
         LocalDateTime end = LocalDateTime.of(2018, Month.OCTOBER, 20, 18, 0);
         PeriodWithTime period = PeriodWithTime.between(start, end);
@@ -59,5 +59,16 @@ public class ConferenceTest {
         int numberOfMeals = conference.computeNumberOfMeals(period);
 
         assertThat(numberOfMeals).isEqualTo(6);
+    }
+
+    @Test
+    public void should_compute_number_of_meals_in_a_period_of_two_days_minus_one_meal_first_day(){
+        LocalDateTime start = LocalDateTime.of(2018, Month.OCTOBER, 18, 14, 0);
+        LocalDateTime end = LocalDateTime.of(2018, Month.OCTOBER, 20, 0, 0);
+        PeriodWithTime period = PeriodWithTime.between(start, end);
+
+        int numberOfMeals = conference.computeNumberOfMeals(period);
+
+        assertThat(numberOfMeals).isEqualTo(3);
     }
 }

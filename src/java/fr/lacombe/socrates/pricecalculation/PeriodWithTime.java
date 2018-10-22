@@ -24,7 +24,11 @@ public class PeriodWithTime {
         return period.getDays();
     }
 
-    public int getEndingHour() {
-        return end.getHour();
+    public boolean isEndingAfter(int lunchHour) {
+        return end.getHour() >= lunchHour;
+    }
+
+    public boolean isStartingAfter(int endLunchHour) {
+        return start.getHour() >= endLunchHour;
     }
 }
