@@ -15,7 +15,7 @@ class Participant {
     }
 
     boolean isPresent(final Period period) {
-        return sojourn.intersects(period);
+        return sojourn.contains(period);
     }
 
     boolean hasDiet(final Diet diet) {

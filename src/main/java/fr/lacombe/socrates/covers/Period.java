@@ -16,11 +16,7 @@ class Period {
         return new Period(start, end);
     }
 
-    boolean intersects(final Period period) {
-        return start.isAfter(period.start) && start.isBefore(period.end)
-                || end.isAfter(period.start) && end.isBefore(period.end)
-                || start.isEqual(period.start) && end.isEqual(period.end)
-                || start.isAfter(period.start) && end.isBefore(period.end)
-                || start.isBefore(period.start) && end.isAfter(period.end);
+    boolean contains(final Period period) {
+        return start.isBefore(period.start) && end.isAfter(period.end);
     }
 }
