@@ -29,7 +29,7 @@ public class MealsTest {
                 VEGETARIAN
         ));
 
-        final List<Covers> result = Meals.calculateCovers(participants, meals);
+        final List<Covers> result = Covers.from(meals, participants);
 
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(
@@ -56,7 +56,7 @@ public class MealsTest {
                 VEGETARIAN
         ));
 
-        final List<Covers> result = Meals.calculateCovers(participants, meals);
+        final List<Covers> result = Covers.from(meals, participants);
 
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(
@@ -89,7 +89,7 @@ public class MealsTest {
                 VEGETARIAN
         ));
 
-        final List<Covers> result = Meals.calculateCovers(participants, meals);
+        final List<Covers> result = Covers.from(meals, participants);
 
         assertThat(result).isEqualTo(asList(
                 Covers.of(
@@ -128,7 +128,7 @@ public class MealsTest {
                 ), VEGETARIAN)
         );
 
-        final List<Covers> result = Meals.calculateCovers(participants, meals);
+        final List<Covers> result = Covers.from(meals, participants);
 
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(
@@ -159,7 +159,7 @@ public class MealsTest {
                 ), VEGETARIAN)
         );
 
-        final List<Covers> result = Meals.calculateCovers(participants, meals);
+        final List<Covers> result = Covers.from(meals, participants);
 
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(
@@ -190,7 +190,7 @@ public class MealsTest {
                 ), VEGETARIAN)
         );
 
-        final List<Covers> result = Meals.calculateCovers(participants, meals);
+        final List<Covers> result = Covers.from(meals, participants);
 
         assertThat(result).isEqualTo(singletonList(
                 Covers.of(

@@ -20,7 +20,7 @@ public class CoversApplication {
         final List<Meal> meals = parseMeals(args[0]);
         final List<Participant> participants = parseParticipants(args[1]);
 
-        final List<Covers> covers = Meals.calculateCovers(participants, meals);
+        final List<Covers> covers = Covers.from(meals, participants);
         System.out.println(covers);
     }
 

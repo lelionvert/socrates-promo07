@@ -3,6 +3,8 @@ package fr.lacombe.socrates.covers;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.toList;
+
 class Covers {
 
     private final Meal meal;
@@ -15,6 +17,20 @@ class Covers {
 
     static Covers of(final Meal meal, final List<Diet> diets) {
         return new Covers(meal, diets);
+    }
+
+    static List<Covers> from(final List<Meal> meals, final List<Participant> participants) {
+        return meals
+                .stream()
+                .map(meal -> of(
+                        meal,
+                        participants
+                                .stream()
+                                .filter(meal::hasParticipant)
+                                .map(Participant::getDiet)
+                                .collect(toList())
+                ))
+                .collect(toList());
     }
 
     @Override
