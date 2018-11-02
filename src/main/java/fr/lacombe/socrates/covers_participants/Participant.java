@@ -28,7 +28,7 @@ public class Participant {
         return checkIn.toLocalTime().isAfter(time);
     }
 
-    boolean leavesAfter(final LocalDateTime dateTime) {
-        return checkOut.isAfter(dateTime);
+    boolean leavesBefore(final LocalDateTime dateTime) {
+        return checkOut.isBefore(dateTime);
     }
 }

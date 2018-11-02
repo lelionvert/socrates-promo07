@@ -3,27 +3,43 @@ package fr.lacombe.socrates.covers_participants;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
-import static java.time.Month.NOVEMBER;
+import java.time.Period;
 
 class CoversCalculator {
 
-    private static final LocalDate FIRST_DAY_OF_CONFERENCE = LocalDate.of(2018, NOVEMBER, 1);
-    private static final LocalTime THURSDAY_COLD_MEAL_START_HOUR = LocalTime.of(22, 0);
-    private static final LocalDateTime END_OF_LAST_MEAL_OF_CONFERENCE = LocalDateTime.of(2018, NOVEMBER, 4, 14, 0);
+    private static final int NUMBER_OF_MEAL_PER_DAY = 2;
+
+    private final LocalDate startDay;
+    private final LocalTime endHourOfDiner;
+    private final LocalDateTime startHourOfLastLunch;
+    private final int minNumberOfHotMeals;
+
+    CoversCalculator(ConferenceConfiguration conferenceConfiguration) {
+        this.startHourOfLastLunch = LocalDateTime.of(
+                conferenceConfiguration.getEndDay(),
+                conferenceConfiguration.getStartHourOfLunch()
+        );
+        this.startDay = conferenceConfiguration.getStartDay();
+        this.endHourOfDiner = conferenceConfiguration.getEndHourOfDiner();
+        final Period conferencePeriod = Period.between(
+                conferenceConfiguration.getStartDay(),
+                conferenceConfiguration.getEndDay()
+        );
+        this.minNumberOfHotMeals = (conferencePeriod.getDays() - 1) * NUMBER_OF_MEAL_PER_DAY;
+    }
 
     Covers compute(final Participant participant) {
         int numberOfColdMeals = 0;
-        int numberOfHotMeals = 4;
+        int numberOfHotMeals = minNumberOfHotMeals;
 
-        if (!participant.leavesAfter(END_OF_LAST_MEAL_OF_CONFERENCE)) {
+        if (participant.leavesBefore(startHourOfLastLunch)) {
             numberOfColdMeals++;
         } else {
             numberOfHotMeals++;
         }
 
-        if (participant.isPresent(FIRST_DAY_OF_CONFERENCE)) {
-            if (participant.arrivesAfter(THURSDAY_COLD_MEAL_START_HOUR)) {
+        if (participant.isPresent(startDay)) {
+            if (participant.arrivesAfter(endHourOfDiner)) {
                 numberOfColdMeals++;
             } else {
                 numberOfHotMeals++;
