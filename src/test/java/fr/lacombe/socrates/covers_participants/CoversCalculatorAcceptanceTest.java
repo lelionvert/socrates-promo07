@@ -23,4 +23,18 @@ public class CoversCalculatorAcceptanceTest {
 
         assertThat(result).isEqualTo(5);
     }
+
+    @Test
+    public void should_calculate_the_number_of_hot_and_cold_covers_for_one_participant() {
+        final Participant participant = Participant.of(
+                Email.of("toto@toto.fr"),
+                Diet.PESCETARIAN,
+                LocalDateTime.of(2018, Month.NOVEMBER, 1, 23, 0),
+                LocalDateTime.of(2018, Month.NOVEMBER, 4, 10, 0)
+        );
+
+        final Covers result = new CoversCalculator().compute(participant);
+
+        assertThat(result).isEqualTo(Covers.of(2, 4));
+    }
 }

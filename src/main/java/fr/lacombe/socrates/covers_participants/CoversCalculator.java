@@ -15,4 +15,8 @@ class CoversCalculator {
 
         return 5;
     }
+
+    Covers compute(final Participant participant) {
+        return Covers.of(0, 5);
+    }
 }
