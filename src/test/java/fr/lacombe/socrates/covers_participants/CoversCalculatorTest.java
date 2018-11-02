@@ -11,34 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CoversCalculatorTest {
 
     @Test
-    public void should_calculate_the_number_of_covers_for_one_participant() {
-        final Participant participant = Participant.of(
-                Email.of("toto@toto.fr"),
-                Diet.PESCETARIAN,
-                LocalDateTime.of(2018, Month.NOVEMBER, 2, 10, 0),
-                LocalDateTime.of(2018, Month.NOVEMBER, 4, 15, 0)
-        );
-
-        final int result = new CoversCalculator().calculateCovers(participant);
-
-        assertThat(result).isEqualTo(5);
-    }
-
-    @Test
-    public void should_calculate_the_number_of_covers_for_one_participant_2() {
-        final Participant participant = Participant.of(
-                Email.of("toto@toto.fr"),
-                Diet.PESCETARIAN,
-                LocalDateTime.of(2018, Month.NOVEMBER, 1, 18, 0),
-                LocalDateTime.of(2018, Month.NOVEMBER, 4, 15, 0)
-        );
-
-        final int result = new CoversCalculator().calculateCovers(participant);
-
-        assertThat(result).isEqualTo(6);
-    }
-
-    @Test
     public void should_calculate_the_number_of_hot_and_cold_covers_for_one_participant() {
         final Participant participant = Participant.of(
                 Email.of("toto@toto.fr"),
@@ -92,5 +64,33 @@ public class CoversCalculatorTest {
         final Covers result = new CoversCalculator().compute(participant);
 
         assertThat(result).isEqualTo(Covers.of(1, 5));
+    }
+
+    @Test
+    public void should_calculate_the_number_of_hot_and_cold_covers_for_one_participant_5() {
+        final Participant participant = Participant.of(
+                Email.of("toto@toto.fr"),
+                Diet.PESCETARIAN,
+                LocalDateTime.of(2018, Month.NOVEMBER, 1, 23, 0),
+                LocalDateTime.of(2018, Month.NOVEMBER, 4, 10, 0)
+        );
+
+        final Covers result = new CoversCalculator().compute(participant);
+
+        assertThat(result).isEqualTo(Covers.of(2, 4));
+    }
+
+    @Test
+    public void should_calculate_the_number_of_hot_and_cold_covers_for_one_participant_6() {
+        final Participant participant = Participant.of(
+                Email.of("toto@toto.fr"),
+                Diet.PESCETARIAN,
+                LocalDateTime.of(2018, Month.NOVEMBER, 2, 10, 0),
+                LocalDateTime.of(2018, Month.NOVEMBER, 4, 10, 0)
+        );
+
+        final Covers result = new CoversCalculator().compute(participant);
+
+        assertThat(result).isEqualTo(Covers.of(1, 4));
     }
 }
