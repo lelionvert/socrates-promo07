@@ -1,5 +1,5 @@
 package fr.lacombe.socrates.diets;
 
-enum Diet {
+public enum Diet {
     VEGAN, VEGETARIAN, PESCETARIAN, OMNIVOROUS
 }

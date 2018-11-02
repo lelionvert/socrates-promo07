@@ -1,6 +1,7 @@
 package fr.lacombe.socrates.mocked_covers;
 
 import org.assertj.core.api.Assertions;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -51,6 +52,7 @@ public class CoversActionTest {
         ),CoversByDiet.of(emptyMap()))));
     }
 
+    @Ignore
     @Test
     public void eefhzeh2() {
         final IYoloDataSource iYoloDataSource = mock(IYoloDataSource.class);
