@@ -9,13 +9,15 @@ import java.time.LocalTime;
 public class Participant {
 
     private final LocalDateTime checkIn;
+    private final LocalDateTime checkOut;
 
-    public Participant(final LocalDateTime checkIn) {
+    public Participant(final LocalDateTime checkIn, final LocalDateTime checkOut) {
         this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
     public static Participant of(final Email email, final Diet diet, final LocalDateTime checkIn, final LocalDateTime checkOut) {
-        return new Participant(checkIn);
+        return new Participant(checkIn, checkOut);
     }
 
     boolean isPresent(final LocalDate day) {
@@ -24,5 +26,9 @@ public class Participant {
 
     boolean arrivesAfter(final LocalTime time) {
         return checkIn.toLocalTime().isAfter(time);
+    }
+
+    boolean leavesAfter(final LocalDateTime dateTime) {
+        return checkOut.isAfter(dateTime);
     }
 }
