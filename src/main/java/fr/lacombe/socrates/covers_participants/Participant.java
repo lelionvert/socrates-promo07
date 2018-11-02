@@ -4,6 +4,7 @@ import fr.lacombe.socrates.diets.Diet;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Participant {
 
@@ -19,5 +20,9 @@ public class Participant {
 
     boolean isPresent(final LocalDate day) {
         return checkIn.toLocalDate().isEqual(day);
+    }
+
+    boolean arrivesAfter(final LocalTime time) {
+        return checkIn.toLocalTime().isAfter(time);
     }
 }
